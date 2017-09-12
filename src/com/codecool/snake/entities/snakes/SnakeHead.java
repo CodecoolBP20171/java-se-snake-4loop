@@ -15,6 +15,9 @@ public class SnakeHead extends GameEntity implements Animatable {
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
 
+    private static int maxShootDelay = 29;
+    private int actualShootDelay;
+
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
         setX(xc);
@@ -23,22 +26,41 @@ public class SnakeHead extends GameEntity implements Animatable {
         tail = this;
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
-
         addPart(4);
     }
 
     public void step() {
+        if (actualShootDelay > 0){
+            actualShootDelay--;
+        }
+
         double dir = getRotate();
+        System.out.println(dir);
         if (Globals.leftKeyDown) {
             dir = dir - turnRate;
         }
         if (Globals.rightKeyDown) {
             dir = dir + turnRate;
         }
-        if (Globals.spaceKeyDown){
-            new Shoot(pane, getX() + 20, getY()+ 20, dir);
+
+        if (Globals.spaceKeyDown && actualShootDelay < 1){
+
+            new Shoot(pane, getX() + 10, getY(), dir);
+            actualShootDelay = maxShootDelay;
             Globals.spaceKeyDown = false;
         }
+        
+        /*if (Globals.spaceKeyDown){
+            new Shoot(pane, getX(), getY(), dir);
+            Globals.spaceKeyDown = false;
+        }*/
+
+        /*if (Globals.spaceKeyDown && actualShootDelay < 1){
+
+            new Shoot(pane, getX() + 20, getY()+ 20, dir);
+            actualShootDelay = maxShootDelay;
+            Globals.spaceKeyDown = false;
+        }*/
 
 
         // set rotation and position
@@ -46,6 +68,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         Point2D heading = Utils.directionToVector(dir, speed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
+
 
         // check if collided with an enemy or a powerup
         for (GameEntity entity : Globals.getGameObjects()) {

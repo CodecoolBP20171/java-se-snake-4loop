@@ -24,6 +24,7 @@ public class Game extends Pane {
 
     public void start() {
         Scene scene = getScene();
+
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
@@ -39,6 +40,8 @@ public class Game extends Pane {
                 case SPACE: Globals.spaceKeyDown = false; break;
             }
         });
+
+
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
     }

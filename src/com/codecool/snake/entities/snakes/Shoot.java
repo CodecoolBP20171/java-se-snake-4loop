@@ -13,6 +13,7 @@ public class Shoot extends GameEntity implements Animatable {
 
     private double shootDir;
     private static final float speed = 4;
+    private int stepCounter;
 
     protected Shoot(Pane pane, double x, double y, double dir) {
         super(pane);
@@ -21,7 +22,9 @@ public class Shoot extends GameEntity implements Animatable {
         setImage(Globals.snakeShoot);
         pane.getChildren().add(this);
         shootDir = dir;
+        stepCounter = 0;
         setRotate(shootDir);
+        this.setVisible(false);
     }
 
     @Override
@@ -30,9 +33,13 @@ public class Shoot extends GameEntity implements Animatable {
             destroy();
         }
 
+        if (stepCounter > 15){
+            this.setVisible(true);
+        }
 
         // set rotation and position
         setRotate(shootDir);
+
         Point2D heading = Utils.directionToVector(shootDir, speed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
@@ -46,6 +53,8 @@ public class Shoot extends GameEntity implements Animatable {
                 }
             }
         }
+
+        stepCounter++;
     }
 
 
