@@ -14,6 +14,9 @@ public class Globals {
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
 
+    public static boolean onePlayerMode;
+
+    public static Image title = new Image ("snake_main.png");
     public static Image snakeHead = new Image("snake_head.png");
     public static Image snakeBody = new Image("snake_body.png");
     public static Image simpleEnemy = new Image("simple_enemy.png");
@@ -31,6 +34,7 @@ public class Globals {
         gameObjects = new LinkedList<>();
         newGameObjects = new LinkedList<>();
         oldGameObjects = new LinkedList<>();
+        onePlayerMode = true;
     }
 
     public static void addGameObject(GameEntity toAdd) {
@@ -43,5 +47,16 @@ public class Globals {
 
     public static List<GameEntity> getGameObjects() {
         return Collections.unmodifiableList(gameObjects);
+    }
+
+    public static void destroyAll() {
+
+        if (Globals.gameLoop != null) {
+            Globals.gameLoop.stop();
+        }
+
+        Globals.newGameObjects.clear();
+        Globals.oldGameObjects.clear();
+        Globals.gameObjects.clear();
     }
 }
