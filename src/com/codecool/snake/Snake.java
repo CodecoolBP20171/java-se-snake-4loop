@@ -8,10 +8,12 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Snake extends Application {
@@ -25,6 +27,11 @@ public class Snake extends Application {
         Scene scene = new Scene(root, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
         // primaryStage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
 
+        ImageView mainTitle = new ImageView();
+        mainTitle.fitWidthProperty().bind(scene.widthProperty());
+        mainTitle.fitHeightProperty().bind(scene.heightProperty());
+        mainTitle.setImage(Globals.title);
+
         // Create menu bar
         MenuBar menuBar = new MenuBar();
         Menu menuFile = new Menu("Game");
@@ -33,7 +40,8 @@ public class Snake extends Application {
         menuBar.getMenus().addAll(menuFile, menuSettings);
 
         root.setTop(menuBar);
-        //root.setCenter(game);
+        root.setCenter(mainTitle);
+
 
         // File menu
 

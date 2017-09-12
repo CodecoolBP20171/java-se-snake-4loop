@@ -16,6 +16,7 @@ public class Globals {
 
     public static boolean onePlayerMode;
 
+    public static Image title = new Image ("snake_main.png");
     public static Image snakeHead = new Image("snake_head.png");
     public static Image snakeBody = new Image("snake_body.png");
     public static Image simpleEnemy = new Image("simple_enemy.png");
