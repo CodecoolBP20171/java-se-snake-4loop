@@ -1,6 +1,10 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.powerups.FugitivePowerup;
+import com.codecool.snake.entities.powerups.MovingPowerup;
+import com.codecool.snake.entities.powerups.SimplePowerup;
 import javafx.geometry.Point2D;
+import javafx.scene.layout.Pane;
 
 public class Utils {
 
@@ -13,4 +17,5 @@ public class Utils {
         Point2D heading = new Point2D(length * Math.sin(directionInRadians), - length * Math.cos(directionInRadians));
         return heading;
     }
+
 }

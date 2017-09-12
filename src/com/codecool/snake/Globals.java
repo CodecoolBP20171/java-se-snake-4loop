@@ -3,10 +3,13 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 
+import java.lang.reflect.Array;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 // class for holding all static stuff
 public class Globals {
@@ -26,11 +29,29 @@ public class Globals {
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
     public static GameLoop gameLoop;
+    public static Pane pane;
 
     static {
         gameObjects = new LinkedList<>();
         newGameObjects = new LinkedList<>();
         oldGameObjects = new LinkedList<>();
+    }
+
+    private static Random rnd = new Random();
+
+    public static Double getRandomDirection() {
+        return rnd.nextDouble() * 360;
+    }
+
+    public static Double[] getRandomCoordinates() {
+        Double[] coordinates = new Double[2];
+        coordinates[0] = rnd.nextDouble() * Globals.WINDOW_WIDTH;
+        coordinates[1] = rnd.nextDouble() * Globals.WINDOW_HEIGHT;
+        return coordinates;
+    }
+
+    public static int getRandomTime() {
+        return rnd.nextInt(10) * 60;
     }
 
     public static void addGameObject(GameEntity toAdd) {
