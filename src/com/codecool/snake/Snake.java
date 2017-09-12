@@ -55,7 +55,7 @@ public class Snake extends Application {
             }
         });
 
-        // newGame.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
+        newGame.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
 
 
         MenuItem exit = new MenuItem("Exit");
@@ -64,6 +64,8 @@ public class Snake extends Application {
                 System.exit(0);
             }
         });
+
+        exit.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
 
 
         // Settings menu
