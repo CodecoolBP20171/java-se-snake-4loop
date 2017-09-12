@@ -18,4 +18,7 @@ public class Utils {
         return heading;
     }
 
+    public static double deltaCoordsToDirection(double deltaX, double deltaY) {
+        return Math.atan2(deltaY, deltaX) * (180 / Math.PI) + 90;
+    }
 }
