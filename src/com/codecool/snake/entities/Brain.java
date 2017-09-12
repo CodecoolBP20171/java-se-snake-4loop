@@ -26,20 +26,18 @@ public class Brain {
         if (turnFromEdgeCD >= 1) {
             turnFromEdgeCD--;
         } else if (isCloseToAnyEdge()) {
-            Random rnd = new Random();
             double towardCenterRandom = Utils.deltaCoordsToDirection(Globals.WINDOW_WIDTH/2-body.getX(),
-                    Globals.WINDOW_HEIGHT/2-body.getY()) + rnd.nextDouble() * 60 - 30;
+                    Globals.WINDOW_HEIGHT/2-body.getY()) + Utils.getRandomDirection() / 6 - 30;
             ((Animatable) body).setDirection(towardCenterRandom);
             turnFromEdgeCD = 150;
         } else if (randomTurnCD < 1) {
-            Random rnd = new Random();
 
-            boolean turnRight = rnd.nextInt(100) <= 50;
+            boolean turnRight = Utils.getRandomInt(100) <= 50;
 
             if (turnRight) {
-                toTurnRight = rnd.nextInt(90);
+                toTurnRight = Utils.getRandomInt(90);
             } else {
-                toTurnLeft = rnd.nextInt(90);
+                toTurnLeft = Utils.getRandomInt(90);
             }
             randomTurnCD = 240;
         } else if (toTurnRight > 0) {

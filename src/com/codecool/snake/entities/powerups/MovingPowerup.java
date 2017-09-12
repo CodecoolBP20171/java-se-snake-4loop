@@ -1,6 +1,5 @@
 package com.codecool.snake.entities.powerups;
 
-import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Animatable;
 import javafx.geometry.Point2D;
@@ -33,7 +32,7 @@ public class MovingPowerup extends SimplePowerup implements Animatable {
     }
 
     public void setDirection() {
-        this.direction = Globals.getRandomDirection();
+        this.direction = Utils.getRandomDirection();
         setRotate(direction);
         heading = Utils.directionToVector(direction, speed);
     }

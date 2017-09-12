@@ -1,5 +1,6 @@
 package com.codecool.snake.entities.powerups;
 
+import com.codecool.snake.Utils;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Interactable;
@@ -17,7 +18,7 @@ public class SimplePowerup extends GameEntity implements Interactable {
         setImage(Globals.powerupBerry);
         pane.getChildren().add(this);
 
-        Double[] coord = Globals.getRandomCoordinates();
+        Double[] coord = Utils.getRandomCoordinates();
         setX(coord[0]);
         setY(coord[1]);
     }

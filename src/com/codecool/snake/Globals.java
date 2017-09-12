@@ -5,11 +5,10 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
-import java.lang.reflect.Array;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
+
 
 // class for holding all static stuff
 public class Globals {
@@ -46,22 +45,6 @@ public class Globals {
     }
 
     public static void addGameObject(GameEntity toAdd) { newGameObjects.add(toAdd); }
-    private static Random rnd = new Random();
-
-    public static Double getRandomDirection() {
-        return rnd.nextDouble() * 360;
-    }
-
-    public static Double[] getRandomCoordinates() {
-        Double[] coordinates = new Double[2];
-        coordinates[0] = rnd.nextDouble() * Globals.WINDOW_WIDTH;
-        coordinates[1] = rnd.nextDouble() * Globals.WINDOW_HEIGHT;
-        return coordinates;
-    }
-
-    public static int getRandomTime() {
-        return rnd.nextInt(10) * 60;
-    }
 
 
     public static void removeGameObject(GameEntity toRemove) {

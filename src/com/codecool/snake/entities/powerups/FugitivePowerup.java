@@ -1,14 +1,15 @@
 package com.codecool.snake.entities.powerups;
 
-import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Behavior;
 import com.codecool.snake.entities.Brain;
-import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
 public class FugitivePowerup extends MovingPowerup {
+    /** this food created in random coordinates and head to random direction
+     * if snakeHead close, fleeing opposite direction
+     */
 
     private Point2D heading;
     private Brain brain;
@@ -22,7 +23,7 @@ public class FugitivePowerup extends MovingPowerup {
 
         speed = 1;
 
-        Double[] coords = Globals.getRandomCoordinates();
+        Double[] coords = Utils.getRandomCoordinates();
         setX(coords[0]);
         setY(coords[1]);
     }

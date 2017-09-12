@@ -25,11 +25,11 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
         pane.getChildren().add(this);
 
         int speed = 1;
-        Double[] coords = Globals.getRandomCoordinates();
+        Double[] coords = Utils.getRandomCoordinates();
         setX(coords[0]);
         setY(coords[1]);
 
-        direction = Globals.getRandomDirection();
+        direction = Utils.getRandomDirection();
         setRotate(direction);
         heading = Utils.directionToVector(direction, speed);
     }
