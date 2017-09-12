@@ -40,4 +40,11 @@ public class Game extends Pane {
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
     }
+
+    public void end() {
+        Scene endScene = getScene();
+
+        Globals.gameLoop = new GameLoop();
+        Globals.gameLoop.start();
+    }
 }
