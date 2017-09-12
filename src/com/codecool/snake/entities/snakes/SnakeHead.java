@@ -44,24 +44,10 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
 
         if (Globals.spaceKeyDown && actualShootDelay < 1){
-
-            new Shoot(pane, getX() + 10, getY(), dir);
+            new Shoot(pane, getX(), getY(), dir);
             actualShootDelay = maxShootDelay;
             Globals.spaceKeyDown = false;
         }
-        
-        /*if (Globals.spaceKeyDown){
-            new Shoot(pane, getX(), getY(), dir);
-            Globals.spaceKeyDown = false;
-        }*/
-
-        /*if (Globals.spaceKeyDown && actualShootDelay < 1){
-
-            new Shoot(pane, getX() + 20, getY()+ 20, dir);
-            actualShootDelay = maxShootDelay;
-            Globals.spaceKeyDown = false;
-        }*/
-
 
         // set rotation and position
         setRotate(dir);
