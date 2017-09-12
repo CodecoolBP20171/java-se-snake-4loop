@@ -3,6 +3,7 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -11,6 +12,7 @@ import java.util.List;
 // class for holding all static stuff
 public class Globals {
 
+    public static BorderPane root;
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
 
@@ -31,6 +33,7 @@ public class Globals {
     public static GameLoop gameLoop;
 
     static {
+        root = new BorderPane();
         gameObjects = new LinkedList<>();
         newGameObjects = new LinkedList<>();
         oldGameObjects = new LinkedList<>();

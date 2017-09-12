@@ -16,6 +16,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import static com.codecool.snake.Globals.root;
+
 public class Snake extends Application {
 
     @Override
@@ -23,7 +25,7 @@ public class Snake extends Application {
 
         primaryStage.setTitle("Snake Game");
 
-        BorderPane root = new BorderPane();
+
         Scene scene = new Scene(root, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
         // primaryStage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
 
@@ -49,6 +51,7 @@ public class Snake extends Application {
         newGame.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
                 Globals.destroyAll();
+                Globals.root.setStyle("-fx-background-color: white;");
                 Game game = new Game();
                 root.setCenter(game);
                 game.start();
