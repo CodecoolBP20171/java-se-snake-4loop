@@ -13,4 +13,8 @@ public class Utils {
         Point2D heading = new Point2D(length * Math.sin(directionInRadians), - length * Math.cos(directionInRadians));
         return heading;
     }
+
+    public static double deltaCoordsToDirection(double deltaX, double deltaY) {
+        return Math.atan2(deltaY, deltaX) * (180 / Math.PI) + 90;
+    }
 }

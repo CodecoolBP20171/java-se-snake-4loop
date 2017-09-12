@@ -11,6 +11,10 @@ import java.util.List;
 // class for holding all static stuff
 public class Globals {
 
+    public static SnakeHead snakeHeadEntity;
+
+    public static final double ENEMY_CHASING_SPEED = 1.0;
+    public static final double ENEMY_FLEEING_SPEED = 1.0;
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
 
@@ -33,9 +37,7 @@ public class Globals {
         oldGameObjects = new LinkedList<>();
     }
 
-    public static void addGameObject(GameEntity toAdd) {
-        newGameObjects.add(toAdd);
-    }
+    public static void addGameObject(GameEntity toAdd) { newGameObjects.add(toAdd); }
 
     public static void removeGameObject(GameEntity toRemove) {
         oldGameObjects.add(toRemove);

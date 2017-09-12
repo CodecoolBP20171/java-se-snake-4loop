@@ -5,4 +5,7 @@ package com.codecool.snake.entities;
 public interface Animatable {
 
     void step();
+    void setSpeed(double speed);
+    void setDirection(double direction);
+    double getDirection();
 }
