@@ -18,7 +18,6 @@ public class Snake extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Game game = new Game();
 
         primaryStage.setTitle("Snake Game");
 
@@ -34,17 +33,19 @@ public class Snake extends Application {
         menuBar.getMenus().addAll(menuFile, menuSettings);
 
         root.setTop(menuBar);
-        root.setCenter(game);
+        //root.setCenter(game);
 
         // File menu
 
         MenuItem newGame = new MenuItem("New Game");
-        /*newGame.setOnAction(new EventHandler<ActionEvent>() {
+        newGame.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                boolean withShuffle = true;
-                game.restart(withShuffle);
+                Globals.destroyAll();
+                Game game = new Game();
+                root.setCenter(game);
+                game.start();
             }
-        });*/
+        });
 
         // newGame.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
 
@@ -98,7 +99,7 @@ public class Snake extends Application {
         primaryStage.setScene(scene);
 
         primaryStage.show();
-        game.start();
+
     }
 
 }
