@@ -42,4 +42,16 @@ public class SnakeBody extends GameEntity implements Animatable {
         history.add(new Vec2d(parent.getX(), parent.getY())); // add the parent's current position to the beginning of the history
     }
 
+    public void setSpeed(double speed) {
+        System.out.println("Cannot do this.");
+    }
+
+    public void setDirection(double direction) {
+        System.out.println("Cannot do this.");
+    }
+
+    public double getDirection() {
+        return 0.0;
+    }
+
 }
