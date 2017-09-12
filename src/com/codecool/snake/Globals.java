@@ -63,9 +63,6 @@ public class Globals {
         return rnd.nextInt(10) * 60;
     }
 
-    public static void addGameObject(GameEntity toAdd) {
-        newGameObjects.add(toAdd);
-    }
 
     public static void removeGameObject(GameEntity toRemove) {
         oldGameObjects.add(toRemove);

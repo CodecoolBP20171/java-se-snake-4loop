@@ -12,19 +12,35 @@ public class MovingPowerup extends SimplePowerup implements Animatable {
      */
 
     private Point2D heading;
+    private double direction;
     private static final int VALUE = 3;
-    private static final double SPEED = 0.5;
+    private static double speed = 0.5;
 
     public MovingPowerup(Pane pane) {
         super(pane);
         setDirection();
     }
 
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
 
-    protected void setDirection() {
-        double direction = Globals.getRandomDirection();
+    @Override
+    public void setDirection(double direction) {
+        this.direction = direction;
         setRotate(direction);
-        heading = Utils.directionToVector(direction, SPEED);
+        heading = Utils.directionToVector(direction, speed);
+    }
+
+    public void setDirection() {
+        this.direction = Globals.getRandomDirection();
+        setRotate(direction);
+        heading = Utils.directionToVector(direction, speed);
+    }
+
+    @Override
+    public double getDirection() {
+        return direction;
     }
 
     @Override

@@ -20,6 +20,10 @@ public class Game extends Pane {
         new FugitivePowerup(this);
 
 
+        new SimpleEnemy(this);
+        new SimpleEnemy(this);
+        new SimpleEnemy(this);
+
     }
 
     public void start() {
