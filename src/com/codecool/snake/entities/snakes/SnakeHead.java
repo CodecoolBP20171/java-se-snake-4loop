@@ -18,6 +18,9 @@ public class SnakeHead extends GameEntity implements Animatable {
     private double direction;
     private int score;
 
+    private static int maxShootDelay = 29;
+    private int actualShootDelay;
+
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
         setX(xc);
@@ -33,6 +36,10 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
 
     public void step() {
+        if (actualShootDelay > 0){
+            actualShootDelay--;
+        }
+
         direction = getRotate();
         if (Globals.leftKeyDown) {
             direction = direction - turnRate;
@@ -40,6 +47,13 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (Globals.rightKeyDown) {
             direction = direction + turnRate;
         }
+
+        if (Globals.spaceKeyDown && actualShootDelay < 1){
+            new Shoot(pane, getX(), getY(), direction);
+            actualShootDelay = maxShootDelay;
+            Globals.spaceKeyDown = false;
+        }
+
         // set rotation and position
         setRotate(direction);
         Point2D heading = Utils.directionToVector(direction, speed);
