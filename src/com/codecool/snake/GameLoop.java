@@ -2,6 +2,7 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
+import com.codecool.snake.entities.GameEntityHandler;
 import javafx.animation.AnimationTimer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
@@ -20,7 +21,7 @@ public class GameLoop extends AnimationTimer {
             }
         }
 
-        Game.checkEntities();
+        GameEntityHandler.handleEntities();
 
         Globals.gameObjects.addAll(Globals.newGameObjects);
         Globals.newGameObjects.clear();

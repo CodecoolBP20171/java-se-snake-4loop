@@ -15,13 +15,15 @@ public abstract class GameEntity extends ImageView {
         this.pane = pane;
         // add to the main loop.
         Globals.addGameObject(this);
-        Globals.actualPowerUps++;
     }
 
     public void destroy() {
         if (getParent() != null) {
             pane.getChildren().remove(this);
         }
+
+        GameEntityHandler.decrementEntityCountIfNeeded(this.getClass());
+
         Globals.removeGameObject(this);
     }
 

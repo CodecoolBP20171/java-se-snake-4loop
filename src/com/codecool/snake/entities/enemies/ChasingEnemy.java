@@ -34,6 +34,8 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
         direction = Utils.getRandomDirection();
         setRotate(direction);
         heading = Utils.directionToVector(direction, speed);
+
+        Globals.actualEnemies++;
     }
 
     @Override

@@ -40,6 +40,7 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable,
 
         speed = Utils.getRandomSpeed(1, 3);
 
+        Globals.actualEnemies++;
     }
 
     @Override

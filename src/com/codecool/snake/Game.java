@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 
+import com.codecool.snake.entities.GameEntityHandler;
 import com.codecool.snake.entities.enemies.TestEnemy;
 import com.codecool.snake.entities.enemies.ChasingEnemy;
 import com.codecool.snake.entities.enemies.ShootingEnemy;
@@ -13,12 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Game extends Pane {
-
-        private static int countdownTimer;
 
 
     public Game() {
@@ -26,7 +23,7 @@ public class Game extends Pane {
         Globals.players.add(new SnakeHead(this, 500, 500));
         Globals.pane = this;
 
-        countdownTimer = Utils.getRandomTime();
+        GameEntityHandler.countdownTimer = Utils.getRandomTime();
 
         new SimplePowerup(this);
         new MovingPowerup(this);
@@ -103,9 +100,5 @@ public class Game extends Pane {
 
     }
 
-
-    public static void checkEntities() {
-        countdownTimer++;
-    }
 
 }

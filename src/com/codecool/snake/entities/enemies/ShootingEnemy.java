@@ -27,6 +27,8 @@ public class ShootingEnemy extends GameEntity implements Animatable, Interactabl
         Double[] coords = Utils.getRandomBottomCoordinates();
         setX(coords[0]);
         setY(coords[1]);
+
+        Globals.actualEnemies++;
     }
 
     @Override

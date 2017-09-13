@@ -37,6 +37,8 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
         heading = Utils.directionToVector(direction, speed);
 
         paralyzed = false;
+
+        Globals.actualEnemies++;
     }
 
     @Override
