@@ -16,12 +16,16 @@ public class SimplePowerup extends GameEntity implements Interactable {
 
     public SimplePowerup(Pane pane) {
         super(pane);
-        setImage(Globals.powerupBerry);
+        setImage();
         pane.getChildren().add(this);
 
         Double[] coord = Utils.getRandomCoordinates();
         setX(coord[0]);
         setY(coord[1]);
+    }
+
+    protected void setImage() {
+        setImage(Globals.simplePowerup);
     }
 
 

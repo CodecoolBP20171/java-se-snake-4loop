@@ -11,9 +11,9 @@ import javafx.scene.layout.Pane;
 public class FugitivePowerup extends MovingPowerup {
     /** this food created in random coordinates and head to random direction
      * if snakeHead close, fleeing opposite direction
+     * by catching: snake grow, health increase
      */
 
-    private Point2D heading;
     private Brain brain;
     private double speed;
     private static final int VALUE = 10;
@@ -23,6 +23,11 @@ public class FugitivePowerup extends MovingPowerup {
         super(pane);
         this.brain = new Brain(Behavior.FLEEING, this);
         this.speed = Globals.ENTITY_SPEED;
+    }
+
+    @Override
+    protected void setImage() {
+        setImage(Globals.fugitivePowerup);
     }
 
 
@@ -47,6 +52,7 @@ public class FugitivePowerup extends MovingPowerup {
     public void apply(SnakeHead snakeHead) {
         snakeHead.addPart(1);
         snakeHead.setScore(FugitivePowerup.VALUE);
+        snakeHead.changeHealth(10);
         destroy();
     }
 

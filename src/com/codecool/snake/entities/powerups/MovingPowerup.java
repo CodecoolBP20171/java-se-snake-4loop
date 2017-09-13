@@ -12,7 +12,7 @@ public class MovingPowerup extends SimplePowerup implements Animatable {
      * and pass over the screen, disappears when outOfBounds
      */
 
-    private Point2D heading;
+    protected Point2D heading;
     private double direction;
     private static final int VALUE = 5;
     private static double speed = Globals.ENTITY_SPEED;
@@ -22,8 +22,14 @@ public class MovingPowerup extends SimplePowerup implements Animatable {
         setDirection();
     }
 
+    @Override
+    protected void setImage() {
+        setImage(Globals.movingPowerup);
+    }
+
+    @Override
     public void setSpeed(double speed) {
-        this.speed = speed;
+        MovingPowerup.speed = speed;
     }
 
     @Override
@@ -34,9 +40,7 @@ public class MovingPowerup extends SimplePowerup implements Animatable {
     }
 
     public void setDirection() {
-        this.direction = Utils.getRandomDirection();
-        setRotate(direction);
-        heading = Utils.directionToVector(direction, speed);
+        setDirection(Utils.getRandomDirection());
     }
 
     @Override

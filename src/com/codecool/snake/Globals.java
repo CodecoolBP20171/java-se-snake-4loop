@@ -20,18 +20,28 @@ public class Globals {
     public static final double ENTITY_FLEEING_SPEED = 1.2;
     public static final double ENTITY_SPEED = 0.7;
 
+    // max entity numbers
+    public static final int MAX_ENTITY_NUMBER = 10;
+    public static final int MAX_ENEMY_NUMBER = 8;
+    public static final int MAX_PUP_NUMBER = 7;
+    public static int actualPowerUps;
+    public static int actualEnemies;
+
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
 
     public static boolean onePlayerMode;
 
+    // entity images
     public static Image title = new Image ("snake_main.png");
     public static Image snakeHead = new Image("snake_head.png");
     public static Image snakeBody = new Image("snake_body.png");
     public static Image simpleEnemy = new Image("simple_enemy.png");
-    public static Image powerupBerry = new Image("powerup_berry.png");
+    public static Image simplePowerup = new Image("powerup_berry.png");
+    public static Image movingPowerup = new Image("powerup_berry.png");
+    public static Image fugitivePowerup = new Image("powerup_berry.png");
     public static Image snakeShoot = new Image("shoot2.png");
-    //.. put here the other images you want to use
+
 
     public static boolean leftKeyDown;
     public static boolean rightKeyDown;
