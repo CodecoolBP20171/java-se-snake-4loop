@@ -6,6 +6,7 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.enemies.TestEnemy;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
@@ -48,7 +49,7 @@ public class Projectile extends GameEntity implements Animatable {
         // check if collided with an enemy or a powerup
         for (GameEntity entity : Globals.getGameObjects()) {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
-                if (entity instanceof Interactable && entity instanceof SimpleEnemy) {
+                if ((entity instanceof Interactable && entity instanceof SimpleEnemy) || (entity instanceof Interactable && entity instanceof TestEnemy)) {
                     Interactable interactable = (Interactable) entity;
                     interactable.apply(this);
 
