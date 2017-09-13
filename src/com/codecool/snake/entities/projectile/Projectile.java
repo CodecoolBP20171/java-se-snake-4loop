@@ -1,4 +1,4 @@
-package com.codecool.snake.entities.snakes;
+package com.codecool.snake.entities.projectile;
 
 import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
@@ -9,17 +9,18 @@ import com.codecool.snake.entities.enemies.SimpleEnemy;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
-public class Shoot extends GameEntity implements Animatable {
+public class Projectile extends GameEntity implements Animatable {
 
     private double shootDir;
-    private static final float speed = 4;
+    private float speed;
     private int stepCounter;
 
-    protected Shoot(Pane pane, double x, double y, double dir) {
+    public Projectile(Pane pane, double x, double y, double dir, ProjectileType projectileType) {
         super(pane);
         setX(x);
         setY(y);
-        setImage(Globals.snakeShoot);
+        setImage(projectileType.getImage());
+        this.speed = projectileType.getSpeed();
         pane.getChildren().add(this);
         shootDir = dir;
         stepCounter = 0;
@@ -50,6 +51,8 @@ public class Shoot extends GameEntity implements Animatable {
                 if (entity instanceof Interactable && entity instanceof SimpleEnemy) {
                     Interactable interactable = (Interactable) entity;
                     interactable.apply(this);
+
+                    destroy();
                 }
             }
         }
