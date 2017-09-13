@@ -9,6 +9,10 @@ import com.codecool.snake.entities.Interactable;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class SnakeHead extends GameEntity implements Animatable {
 
     private static final float speed = 2;
@@ -16,6 +20,8 @@ public class SnakeHead extends GameEntity implements Animatable {
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
     private int score;
+
+    private List<SnakeBody> myBody = new ArrayList<>();
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -51,6 +57,15 @@ public class SnakeHead extends GameEntity implements Animatable {
                     Interactable interactable = (Interactable) entity;
                     interactable.apply(this);
                     System.out.println(interactable.getMessage());
+                } else if (myBody.size() > 16 &&
+                        myBody.contains(entity) &&
+                        !entity.equals(myBody.get(0)) &&
+                        !entity.equals(myBody.get(1)) &&
+                        !entity.equals(myBody.get(2)) &&
+                        !entity.equals(myBody.get(3))){
+                    Game.showEndScreen(score);
+                    System.out.println("Game Over");
+                    Globals.destroyAll();
                 }
             }
         }
@@ -61,16 +76,22 @@ public class SnakeHead extends GameEntity implements Animatable {
             System.out.println("Game Over");
             Globals.destroyAll();
         }
+
     }
 
     public void addPart(int numParts) {
         for (int i = 0; i < numParts; i++) {
             SnakeBody newPart = new SnakeBody(pane, tail);
             tail = newPart;
+            myBody.add(newPart);
         }
     }
 
     public void changeHealth(int diff) {
         health += diff;
+    }
+
+    public int getHealth() {
+        return health;
     }
 }

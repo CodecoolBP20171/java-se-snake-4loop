@@ -5,6 +5,7 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,12 +33,15 @@ public class Globals {
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
     public static GameLoop gameLoop;
 
+    static List<SnakeHead> players;
+
     static {
         root = new BorderPane();
         gameObjects = new LinkedList<>();
         newGameObjects = new LinkedList<>();
         oldGameObjects = new LinkedList<>();
         onePlayerMode = true;
+        players = new ArrayList<>();
     }
 
     public static void addGameObject(GameEntity toAdd) {
@@ -61,5 +65,6 @@ public class Globals {
         Globals.newGameObjects.clear();
         Globals.oldGameObjects.clear();
         Globals.gameObjects.clear();
+        Globals.players.clear();
     }
 }
