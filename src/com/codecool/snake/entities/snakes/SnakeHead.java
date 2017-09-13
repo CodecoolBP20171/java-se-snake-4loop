@@ -18,6 +18,10 @@ public class SnakeHead extends GameEntity implements Animatable {
     private double direction;
     private int score;
 
+    public void setScore(int score) {
+        this.score += score;
+    }
+
     private static int maxShootDelay = 29;
     private int actualShootDelay;
 

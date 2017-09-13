@@ -1,8 +1,10 @@
 package com.codecool.snake.entities.powerups;
 
+import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Behavior;
 import com.codecool.snake.entities.Brain;
+import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
@@ -14,18 +16,13 @@ public class FugitivePowerup extends MovingPowerup {
     private Point2D heading;
     private Brain brain;
     private double speed;
-    private static final int VALUE = 4;
+    private static final int VALUE = 10;
 
 
     public FugitivePowerup(Pane pane) {
         super(pane);
         this.brain = new Brain(Behavior.FLEEING, this);
-
-        speed = 1;
-
-        Double[] coords = Utils.getRandomCoordinates();
-        setX(coords[0]);
-        setY(coords[1]);
+        this.speed = Globals.ENTITY_SPEED;
     }
 
 
@@ -37,8 +34,6 @@ public class FugitivePowerup extends MovingPowerup {
     @Override
     public void step() {
 
-        speed = 0.8;
-
         brain.navigate();
 
         setRotate(getDirection());
@@ -46,6 +41,13 @@ public class FugitivePowerup extends MovingPowerup {
 
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
+    }
+
+    @Override
+    public void apply(SnakeHead snakeHead) {
+        snakeHead.addPart(1);
+        snakeHead.setScore(FugitivePowerup.VALUE);
+        destroy();
     }
 
 

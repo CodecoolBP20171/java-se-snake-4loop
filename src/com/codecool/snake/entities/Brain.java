@@ -4,8 +4,6 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.snakes.SnakeHead;
 
-import java.util.Random;
-
 public class Brain {
 
     private Behavior behavior;
@@ -22,6 +20,7 @@ public class Brain {
 
     public void navigate() {
         SnakeHead snakeHead = Globals.snakeHeadEntity;
+        ((Animatable) body).setSpeed(Globals.ENTITY_SPEED);
 
         if (turnFromEdgeCD >= 1) {
             turnFromEdgeCD--;
@@ -59,7 +58,7 @@ public class Brain {
 
             Animatable animatable = (Animatable) body;
             animatable.setSpeed((behavior.equals(Behavior.CHASING)) ?
-                    Globals.ENEMY_CHASING_SPEED : Globals.ENEMY_FLEEING_SPEED);
+                    Globals.ENTITY_CHASING_SPEED : Globals.ENTITY_FLEEING_SPEED);
         }
 
     }
