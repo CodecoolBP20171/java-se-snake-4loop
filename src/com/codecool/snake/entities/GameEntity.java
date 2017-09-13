@@ -9,6 +9,7 @@ public abstract class GameEntity extends ImageView {
 
     protected Pane pane;
 
+
     protected GameEntity(Pane pane) {
         this.pane = pane;
         // add to the main loop.
@@ -23,8 +24,8 @@ public abstract class GameEntity extends ImageView {
     }
 
     protected boolean isOutOfBounds() {
-        if (getX() > Globals.WINDOW_WIDTH || getX() < 0 ||
-            getY() > Globals.WINDOW_HEIGHT || getY() < 0) {
+        if (getX() > Globals.WINDOW_WIDTH - 30 || getX() < 0 ||
+            getY() > Globals.WINDOW_HEIGHT - 30 || getY() < 0) {
             return true;
         }
         return false;

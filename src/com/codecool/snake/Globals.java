@@ -3,6 +3,7 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.BorderPane;
 
 import java.util.Collections;
@@ -13,6 +14,10 @@ import java.util.List;
 public class Globals {
 
     public static BorderPane root;
+    public static SnakeHead snakeHeadEntity;
+
+    public static final double ENEMY_CHASING_SPEED = 1.0;
+    public static final double ENEMY_FLEEING_SPEED = 1.0;
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
 
@@ -31,6 +36,7 @@ public class Globals {
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
     public static GameLoop gameLoop;
+    public static Pane pane;
 
     static {
         root = new BorderPane();
@@ -40,9 +46,8 @@ public class Globals {
         onePlayerMode = true;
     }
 
-    public static void addGameObject(GameEntity toAdd) {
-        newGameObjects.add(toAdd);
-    }
+    public static void addGameObject(GameEntity toAdd) { newGameObjects.add(toAdd); }
+
 
     public static void removeGameObject(GameEntity toRemove) {
         oldGameObjects.add(toRemove);
