@@ -1,8 +1,15 @@
 package com.codecool.snake.entities.snakes;
 
+import com.codecool.snake.Game;
+import com.codecool.snake.entities.BodyInteractable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
+import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.enemies.ChasingEnemy;
+import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.projectile.Projectile;
+import com.codecool.snake.entities.projectile.ProjectileType;
 import com.sun.javafx.geom.Vec2d;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -35,11 +42,27 @@ public class SnakeBody extends GameEntity implements Animatable {
         }
     }
 
+
     public void step() {
         Vec2d pos = history.poll(); // remove the oldest item from the history
         setX(pos.x);
         setY(pos.y);
         history.add(new Vec2d(parent.getX(), parent.getY())); // add the parent's current position to the beginning of the history
+
+        // check if collided with an enemy (BodyInteractable)
+        for (GameEntity entity : Globals.getGameObjects()) {
+            if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
+                if (entity instanceof BodyInteractable) {
+                    if (entity instanceof Projectile &&
+                            (((Projectile)entity).getProjectileType().equals(ProjectileType.SNAKE_PROJECTILE))) {
+                        return;
+                    }
+                    BodyInteractable interactable = (BodyInteractable) entity;
+                    interactable.apply(this);
+                    System.out.println(interactable.getMessage());
+                }
+            }
+        }
     }
 
     public void setSpeed(double speed) {

@@ -6,8 +6,14 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.projectile.ProjectileType;
+import com.codecool.snake.entities.projectile.Projectile;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class SnakeHead extends GameEntity implements Animatable {
 
@@ -25,6 +31,8 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     private static int maxShootDelay = 29;
     private int actualShootDelay;
+
+    private List<SnakeBody> myBody = new ArrayList<>();
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -54,7 +62,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
 
         if (Globals.spaceKeyDown && actualShootDelay < 1){
-            new Shoot(pane, getX(), getY(), direction);
+            new Projectile(pane, getX(), getY(), direction, ProjectileType.SNAKE_PROJECTILE);
             actualShootDelay = maxShootDelay;
             Globals.spaceKeyDown = false;
         }
@@ -65,22 +73,37 @@ public class SnakeHead extends GameEntity implements Animatable {
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
 
-        // check if collided with an enemy or a powerup
-        for (GameEntity entity : Globals.getGameObjects()) {
-            if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
-                if (entity instanceof Interactable) {
-                    Interactable interactable = (Interactable) entity;
-                    interactable.apply(this);
-                    System.out.println(interactable.getMessage());
-                }
-            }
-        }
-
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
             Game.showEndScreen(score);
             System.out.println("Game Over");
             Globals.destroyAll();
+        }
+
+        // check if collided with an enemy or a powerup
+        for (GameEntity entity : Globals.getGameObjects()) {
+            if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
+
+                if (entity instanceof Projectile &&
+                        (((Projectile)entity).getProjectileType().equals(ProjectileType.SNAKE_PROJECTILE))) {
+                    return;
+                }
+
+                if (entity instanceof Interactable) {
+                    Interactable interactable = (Interactable) entity;
+                    interactable.apply(this);
+                    System.out.println(interactable.getMessage());
+                } else if (myBody.size() > 16 &&
+                        myBody.contains(entity) &&
+                        !entity.equals(myBody.get(0)) &&
+                        !entity.equals(myBody.get(1)) &&
+                        !entity.equals(myBody.get(2)) &&
+                        !entity.equals(myBody.get(3))){
+                    Game.showEndScreen(score);
+                    System.out.println("Game Over");
+                    Globals.destroyAll();
+                }
+            }
         }
     }
 
@@ -88,11 +111,12 @@ public class SnakeHead extends GameEntity implements Animatable {
         for (int i = 0; i < numParts; i++) {
             SnakeBody newPart = new SnakeBody(pane, tail);
             tail = newPart;
+            myBody.add(newPart);
         }
     }
 
     public void changeHealth(int diff) {
-
+        // TODO: if taking damage make damage taker part red for a bit (or whole worm)
         health += diff;
         if (health > MAX_HEALTH) health = MAX_HEALTH;
     }
@@ -108,5 +132,11 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void setSpeed(double speed) {
         System.out.println("Cannot do this.");
     }
+
+
+    public int getHealth() {
+        return health;
+    }
+
 
 }

@@ -39,4 +39,39 @@ public class Utils {
     public static int getRandomTime() {
         return rnd.nextInt(10) * 60;
     }
+
+    public static double getRandomSpeed(double rangeMin, double rangeMax) {
+        return rangeMin + (rangeMax - rangeMin) * rnd.nextDouble();
+    }
+
+    public static Double[] getRandomSideCoordinates() {
+        Double[] coordinates = new Double[2];
+        double padding = 0.0;
+        coordinates[0] = (rnd.nextInt(100) <= 50) ? 0.0 - padding : Globals.WINDOW_WIDTH + padding;
+        coordinates[1] =  padding + (Globals.WINDOW_HEIGHT - padding) * rnd.nextDouble();
+        return coordinates;
+    }
+
+    public static Double getRandomSideDirection(double x, double y) {
+        double direction;
+        boolean onLeftSide = x < Globals.WINDOW_WIDTH/2;
+        boolean closeToTop = y < Globals.WINDOW_HEIGHT/2;
+        if (onLeftSide && closeToTop) {
+            direction = 120 + (135 - 120) * rnd.nextDouble();
+        } else if (onLeftSide && !closeToTop) {
+            direction = 30 + (60 - 30) * rnd.nextDouble();
+        } else if (!onLeftSide && closeToTop) {
+            direction = 210 + (240 - 210) * rnd.nextDouble();
+        } else {
+            direction = 300 + (330 - 300) * rnd.nextDouble();
+        }
+        return direction;
+    }
+
+    public static Double[] getRandomBottomCoordinates() {
+        Double[] coordinates = new Double[2];
+        coordinates[0] = 50 + (Globals.WINDOW_WIDTH - 50 - 50) * rnd.nextDouble();
+        coordinates[1] = (Globals.WINDOW_HEIGHT - 120) + 30 * rnd.nextDouble();
+        return coordinates;
+    }
 }

@@ -1,6 +1,9 @@
 package com.codecool.snake;
 
 
+import com.codecool.snake.entities.enemies.TestEnemy;
+import com.codecool.snake.entities.enemies.ChasingEnemy;
+import com.codecool.snake.entities.enemies.ShootingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.FugitivePowerup;
 import com.codecool.snake.entities.powerups.MovingPowerup;
@@ -19,7 +22,8 @@ public class Game extends Pane {
 
 
     public Game() {
-        new SnakeHead(this, 500, 500);
+
+        Globals.players.add(new SnakeHead(this, 500, 500));
         Globals.pane = this;
 
         countdownTimer = Utils.getRandomTime();
@@ -28,6 +32,30 @@ public class Game extends Pane {
         new MovingPowerup(this);
         new FugitivePowerup(this);
 
+        new ChasingEnemy(this);
+        new ChasingEnemy(this);
+        /*new ChasingEnemy(this);
+        new ChasingEnemy(this);*/
+
+        new SimpleEnemy(this);
+        new SimpleEnemy(this);
+        /*new SimpleEnemy(this);
+        new SimpleEnemy(this);*/
+
+        new SimplePowerup(this);
+        new SimplePowerup(this);
+        new SimplePowerup(this);
+        new SimplePowerup(this);
+
+        new ShootingEnemy(this);
+        new ShootingEnemy(this);
+        /*new ShootingEnemy(this);
+        new ShootingEnemy(this);*/
+
+        new TestEnemy(this);
+        new TestEnemy(this);
+        /*new TestEnemy(this);
+        new TestEnemy(this);*/
     }
 
     public void start() {
@@ -48,13 +76,12 @@ public class Game extends Pane {
                 case SPACE: Globals.spaceKeyDown = false; break;
             }
         });
-
-
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
     }
 
     public static void showEndScreen(int score) {
+        Globals.root.setBottom(null);
 
         Text message = new Text("Game Over!");
         message.setFill(Color.RED);
@@ -75,6 +102,7 @@ public class Game extends Pane {
         Globals.root.setCenter(textFlow);
 
     }
+
 
     public static void checkEntities() {
         countdownTimer++;
