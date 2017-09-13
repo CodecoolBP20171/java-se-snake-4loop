@@ -1,5 +1,6 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.enemies.TestEnemy;
 import com.codecool.snake.entities.enemies.ChasingEnemy;
 import com.codecool.snake.entities.enemies.ShootingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;

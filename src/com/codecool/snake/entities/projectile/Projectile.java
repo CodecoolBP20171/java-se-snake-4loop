@@ -11,6 +11,7 @@ import com.codecool.snake.entities.enemies.ShootingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import com.codecool.snake.entities.enemies.TestEnemy;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
@@ -68,7 +69,7 @@ public class Projectile extends GameEntity implements Animatable, Interactable, 
                 }
 
                 if (projectileType.equals(ProjectileType.SNAKE_PROJECTILE)) {
-                    if (entity instanceof ChasingEnemy || entity instanceof SimpleEnemy || entity instanceof ShootingEnemy) {
+                    if (entity instanceof ChasingEnemy || entity instanceof SimpleEnemy || entity instanceof ShootingEnemy || entity instanceof TestEnemy) {
                         Interactable interactable = (Interactable) entity;
                         interactable.apply(this);
                         destroy();
