@@ -57,6 +57,19 @@ public class Shoot extends GameEntity implements Animatable {
         stepCounter++;
     }
 
+    @Override
+    public void setSpeed(double speed) {
+        System.out.println("Cannot do this.");
+    }
 
+    @Override
+    public void setDirection(double direction) {
+        System.out.println("Cannot do this.");
 
+    }
+
+    @Override
+    public double getDirection() {
+        return 0;
+    }
 }
