@@ -5,10 +5,7 @@ import com.codecool.snake.entities.powerups.FugitivePowerup;
 import com.codecool.snake.entities.powerups.MovingPowerup;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
-import javafx.geometry.HPos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
@@ -16,13 +13,13 @@ import javafx.scene.text.*;
 public class Game extends Pane {
 
     public Game() {
-        new SnakeHead(this, 500, 500);
+
+        Globals.players.add(new SnakeHead(this, 500, 500));
         Globals.pane = this;
 
         new SimplePowerup(this);
         new MovingPowerup(this);
         new FugitivePowerup(this);
-
 
         new SimpleEnemy(this);
         new SimpleEnemy(this);
@@ -37,7 +34,6 @@ public class Game extends Pane {
 
     public void start() {
         Scene scene = getScene();
-
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
@@ -53,13 +49,12 @@ public class Game extends Pane {
                 case SPACE: Globals.spaceKeyDown = false; break;
             }
         });
-
-
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
     }
 
     public static void showEndScreen(int score) {
+        Globals.root.setBottom(null);
 
         Text message = new Text("Game Over!");
         message.setFill(Color.RED);
@@ -76,8 +71,8 @@ public class Game extends Pane {
 
         Globals.root.setStyle("-fx-background-color: tan;");
 
-
         Globals.root.setCenter(textFlow);
 
     }
+
 }
