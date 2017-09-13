@@ -68,9 +68,22 @@ public class SnakeHead extends GameEntity implements Animatable {
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
 
+        // check for game over condition
+        if (isOutOfBounds() || health <= 0) {
+            Game.showEndScreen(score);
+            System.out.println("Game Over");
+            Globals.destroyAll();
+        }
+
         // check if collided with an enemy or a powerup
         for (GameEntity entity : Globals.getGameObjects()) {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
+
+                if (entity instanceof Projectile &&
+                        (((Projectile)entity).getProjectileType().equals(ProjectileType.SNAKE_PROJECTILE))) {
+                    return;
+                }
+
                 if (entity instanceof Interactable) {
                     Interactable interactable = (Interactable) entity;
                     interactable.apply(this);
@@ -87,14 +100,6 @@ public class SnakeHead extends GameEntity implements Animatable {
                 }
             }
         }
-
-        // check for game over condition
-        if (isOutOfBounds() || health <= 0) {
-            Game.showEndScreen(score);
-            System.out.println("Game Over");
-            Globals.destroyAll();
-        }
-
     }
 
     public void addPart(int numParts) {
@@ -106,6 +111,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
 
     public void changeHealth(int diff) {
+        // TODO: if taking damage make damage taker part red for a bit (or whole worm)
         health += diff;
     }
 

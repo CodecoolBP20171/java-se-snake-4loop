@@ -1,5 +1,7 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.enemies.ChasingEnemy;
+import com.codecool.snake.entities.enemies.ShootingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.FugitivePowerup;
 import com.codecool.snake.entities.powerups.MovingPowerup;
@@ -21,6 +23,11 @@ public class Game extends Pane {
         new MovingPowerup(this);
         new FugitivePowerup(this);
 
+        new ChasingEnemy(this);
+        new ChasingEnemy(this);
+        new ChasingEnemy(this);
+        new ChasingEnemy(this);
+
         new SimpleEnemy(this);
         new SimpleEnemy(this);
         new SimpleEnemy(this);
@@ -30,6 +37,11 @@ public class Game extends Pane {
         new SimplePowerup(this);
         new SimplePowerup(this);
         new SimplePowerup(this);
+
+        new ShootingEnemy(this);
+        new ShootingEnemy(this);
+        new ShootingEnemy(this);
+        new ShootingEnemy(this);
     }
 
     public void start() {

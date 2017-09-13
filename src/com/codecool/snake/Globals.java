@@ -21,6 +21,9 @@ public class Globals {
     public static final double ENEMY_FLEEING_SPEED = 1.5;
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
+    public static final int SIMPLE_ENEMY_ATTACK_COOLDOWN = 120;
+    public static final int RECENTLY_SPAWNED_TIME = 240;
+    public static final int ENEMY_SHOOTING_COOLDOWN = 120;
 
     public static boolean onePlayerMode;
 
@@ -29,7 +32,7 @@ public class Globals {
     public static Image snakeBody = new Image("snake_body.png");
     public static Image simpleEnemy = new Image("simple_enemy.png");
     public static Image powerupBerry = new Image("powerup_berry.png");
-    public static Image snakeShoot = new Image("shoot2.png");
+
     //.. put here the other images you want to use
 
     public static boolean leftKeyDown;
