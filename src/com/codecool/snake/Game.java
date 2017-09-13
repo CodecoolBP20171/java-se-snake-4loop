@@ -26,13 +26,13 @@ public class Game extends Pane {
 
         new ChasingEnemy(this);
         new ChasingEnemy(this);
-        new ChasingEnemy(this);
-        new ChasingEnemy(this);
+        /*new ChasingEnemy(this);
+        new ChasingEnemy(this);*/
 
         new SimpleEnemy(this);
         new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
+        /*new SimpleEnemy(this);
+        new SimpleEnemy(this);*/
 
         new SimplePowerup(this);
         new SimplePowerup(this);
@@ -41,8 +41,13 @@ public class Game extends Pane {
 
         new ShootingEnemy(this);
         new ShootingEnemy(this);
-        new ShootingEnemy(this);
-        new ShootingEnemy(this);
+        /*new ShootingEnemy(this);
+        new ShootingEnemy(this);*/
+
+        new TestEnemy(this);
+        new TestEnemy(this);
+        /*new TestEnemy(this);
+        new TestEnemy(this);*/
     }
 
     public void start() {

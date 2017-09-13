@@ -4,11 +4,12 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.*;
 import com.codecool.snake.entities.projectile.Projectile;
+import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
-public class TestEnemy extends GameEntity implements Animatable, Interactable {
+public class TestEnemy extends GameEntity implements Animatable, Interactable, BodyInteractable {
 
     private Point2D heading;
     private static final int damage = 10;
@@ -69,7 +70,12 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable {
 
     @Override
     public void apply(SnakeHead player) {
-        player.changeHealth(-damage);
+        if (paralyzed){
+            // TODO: put here Jeannie's changeScore method
+            System.out.println("Score increase");
+        } else {
+            player.changeHealth(-damage);
+        }
         destroy();
     }
 
@@ -77,15 +83,20 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable {
     public void apply(Projectile projectile) {
         System.out.println("SHOOTED");
         if (paralyzed){
-            System.out.println("I am dead.");;
-            destroy();
+            System.out.println("I am dead.");
+            paralyzedRoundCounter = 180;
         } else {
             System.out.println("Im am paralized");
             paralyzed = true;
-            speed = 0;
             setImage(Globals.paralyzedSimpleEnemy);
 
-        };
+        }
+    }
+
+    @Override
+    public void apply(SnakeBody snakeBody) {
+        Globals.snakeHeadEntity.changeHealth(-5);
+        destroy();
     }
 
     @Override
