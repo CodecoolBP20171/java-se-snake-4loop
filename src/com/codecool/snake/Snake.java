@@ -50,7 +50,7 @@ public class Snake extends Application {
         newGame.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
                 Globals.destroyAll();
-                Globals.root.setStyle("-fx-background-color: white;");
+                Globals.root.setStyle("-fx-background-color: lightblue;");
                 Game game = new Game();
                 root.setCenter(game);
                 game.start();
