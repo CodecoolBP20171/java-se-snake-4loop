@@ -43,8 +43,6 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
         Globals.actualEnemies++;
     }
 
-    public void setImage() { setImage(Globals.testEnemy); }
-
     @Override
     public void step() {
         if (paralyzedRoundCounter < 1){

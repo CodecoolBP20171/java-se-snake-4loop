@@ -25,7 +25,6 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable,
 
         super(pane);
 
-        setImage();
         pane.getChildren().add(this);
 
         recentlySpawned = Globals.RECENTLY_SPAWNED_TIME;
@@ -34,6 +33,7 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable,
         Double[] coords = Utils.getRandomSideCoordinates();
         setX(coords[0]);
         setY(coords[1]);
+        setImage();
 
         direction = Utils.getRandomSideDirection(coords[0], coords[1]);
         speed = Utils.getRandomSpeed(1, 3);
@@ -43,7 +43,13 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable,
         Globals.actualEnemies++;
     }
 
-    public void setImage() { setImage(Globals.simpleEnemy); }
+    public void setImage() {
+        if (getX() < Globals.WINDOW_WIDTH / 2) {
+            setImage(Globals.simpleEnemyToRight);
+        } else {
+            setImage(Globals.simpleEnemyToLeft);
+        }
+    }
 
     @Override
     public void step() {

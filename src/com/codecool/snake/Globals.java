@@ -64,7 +64,8 @@ public class Globals {
     public static Image movingPowerup;
     public static Image fugitivePowerup;
 
-    public static Image simpleEnemy;
+    public static Image simpleEnemyToRight;
+    public static Image simpleEnemyToLeft;
     public static Image shootingEnemy;
     public static Image chasingEnemy;
     public static Image testEnemy;
@@ -121,7 +122,8 @@ public class Globals {
 
     static void setSeaTheme(){
 
-        simpleEnemy = new Image("sea/octopus.png");
+        simpleEnemyToRight = new Image("sea/shark_right_side.png");
+        simpleEnemyToLeft = new Image("sea/shark_left_side.png");
         shootingEnemy = new Image("sea/simple_enemy.png");
         chasingEnemy = new Image("sea/goldfish.png");
         testEnemy = new Image("sea/crab.png");
@@ -135,7 +137,8 @@ public class Globals {
 
     static void setWildwestTheme(){
 
-        simpleEnemy = new Image("wildwest/bee.png");
+        simpleEnemyToRight = new Image("wildwest/bee.png");
+        simpleEnemyToLeft = new Image("wildwest/bee.png");
         shootingEnemy = new Image("wildwest/cowboy.png");
         chasingEnemy = new Image("wildwest/hedgehog.png");
         testEnemy = new Image("wildwest/pig.png");

@@ -7,4 +7,7 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 public interface Animatable {
 
     void step();
+    void setSpeed(double speed);
+    void setDirection(double direction);
+    double getDirection();
 }
