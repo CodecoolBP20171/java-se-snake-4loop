@@ -24,6 +24,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private int health;
     private double direction;
     private int score;
+    private int controlKeys;
 
     public void setScore(int score) {
         this.score += score;
@@ -34,13 +35,14 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     private List<SnakeBody> myBody = new ArrayList<>();
 
-    public SnakeHead(Pane pane, int xc, int yc) {
+    public SnakeHead(Pane pane, int xc, int yc, int controlKeys) {
         super(pane);
         setX(xc);
         setY(yc);
         health = MAX_HEALTH;
         score = 0;
         tail = this;
+        this.controlKeys = controlKeys;
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
         Globals.snakeHeadEntity = this;
@@ -54,17 +56,18 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
 
         direction = getRotate();
-        if (Globals.leftKeyDown) {
+        if (getTurnLeftKeyDown()) {
             direction = direction - turnRate;
         }
-        if (Globals.rightKeyDown) {
+
+        if (getTurnRightKeyDown()) {
             direction = direction + turnRate;
         }
 
-        if (Globals.spaceKeyDown && actualShootDelay < 1){
+        if (getShootKeyDown() && actualShootDelay < 1){
             new Projectile(pane, getX(), getY(), direction, ProjectileType.SNAKE_PROJECTILE);
             actualShootDelay = maxShootDelay;
-            Globals.spaceKeyDown = false;
+            Globals.upKeyDown = false;
         }
 
         // set rotation and position
@@ -136,6 +139,52 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public int getHealth() {
         return health;
+    }
+
+
+    private boolean getTurnLeftKeyDown() {
+
+        boolean keyPressed = false;
+        switch (controlKeys) {
+            case 1:
+                keyPressed = Globals.leftKeyDown;
+                break;
+            case 2:
+                keyPressed = Globals.qKeyDown;
+                break;
+        }
+
+        return keyPressed;
+    }
+
+    private boolean getTurnRightKeyDown() {
+
+        boolean keyPressed = false;
+        switch (controlKeys) {
+            case 1:
+                keyPressed = Globals.rightKeyDown;
+                break;
+            case 2:
+                keyPressed = Globals.wKeyDown;
+                break;
+        }
+
+        return keyPressed;
+    }
+
+    private boolean getShootKeyDown() {
+
+        boolean keyPressed = false;
+        switch (controlKeys) {
+            case 1:
+                keyPressed = Globals.upKeyDown;
+                break;
+            case 2:
+                keyPressed = Globals.spaceKeyDown;
+                break;
+        }
+
+        return keyPressed;
     }
 
 

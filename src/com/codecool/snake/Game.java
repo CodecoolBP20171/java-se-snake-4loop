@@ -2,9 +2,7 @@ package com.codecool.snake;
 
 
 import com.codecool.snake.entities.GameEntityHandler;
-import com.codecool.snake.entities.enemies.TestEnemy;
 import com.codecool.snake.entities.enemies.ChasingEnemy;
-import com.codecool.snake.entities.enemies.ShootingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.FugitivePowerup;
 import com.codecool.snake.entities.powerups.MovingPowerup;
@@ -20,7 +18,12 @@ public class Game extends Pane {
 
     public Game() {
 
-        Globals.players.add(new SnakeHead(this, 500, 500));
+        Globals.players.add(new SnakeHead(this, 500, 500, 1));
+
+        if (!Globals.onePlayerMode) {
+            Globals.players.add(new SnakeHead(this, 200, 200, 2));
+        }
+
         Globals.pane = this;
 
         GameEntityHandler.countdownTimer = Utils.getRandomTime();
@@ -62,6 +65,9 @@ public class Game extends Pane {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
                 case RIGHT: Globals.rightKeyDown  = true; break;
+                case UP: Globals.upKeyDown = true; break;
+                case Q: Globals.qKeyDown = true; break;
+                case W: Globals.wKeyDown = true; break;
                 case SPACE: Globals.spaceKeyDown = true; break;
             }
         });
@@ -70,6 +76,9 @@ public class Game extends Pane {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = false; break;
                 case RIGHT: Globals.rightKeyDown  = false; break;
+                case UP: Globals.upKeyDown = false; break;
+                case Q: Globals.qKeyDown = false; break;
+                case W: Globals.wKeyDown = false; break;
                 case SPACE: Globals.spaceKeyDown = false; break;
             }
         });
