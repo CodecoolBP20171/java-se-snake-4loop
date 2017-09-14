@@ -42,6 +42,8 @@ public class Globals {
     public static Image title = new Image ("snake_main.png");
     public static Image snakeHead = new Image("snake_head.png");
     public static Image snakeBody = new Image("snake_body.png");
+    public static Image snakeHead2 = new Image("snake_head.png");
+    public static Image snakeBody2 = new Image("snake_body.png");
     public static Image simpleEnemy = new Image("simple_enemy.png");
     public static Image simplePowerup = new Image("powerup_berry.png");
     public static Image movingPowerup = new Image("powerup_berry.png");

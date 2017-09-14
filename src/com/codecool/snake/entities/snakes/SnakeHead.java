@@ -9,6 +9,7 @@ import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.projectile.ProjectileType;
 import com.codecool.snake.entities.projectile.Projectile;
 import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private int health;
     private double direction;
     private int score;
-    private int controlKeys;
+    private int player;
 
     public void setScore(int score) {
         this.score += score;
@@ -35,15 +36,24 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     private List<SnakeBody> myBody = new ArrayList<>();
 
-    public SnakeHead(Pane pane, int xc, int yc, int controlKeys) {
+    public SnakeHead(Pane pane, int xc, int yc, int player) {
         super(pane);
         setX(xc);
         setY(yc);
         health = MAX_HEALTH;
         score = 0;
         tail = this;
-        this.controlKeys = controlKeys;
-        setImage(Globals.snakeHead);
+        this.player = player;
+
+        switch (player) {
+            case 1:
+                setImage(Globals.snakeHead);
+                break;
+            case 2:
+                setImage(Globals.snakeHead2);
+                break;
+        }
+
         pane.getChildren().add(this);
         Globals.snakeHeadEntity = this;
 
@@ -112,7 +122,7 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void addPart(int numParts) {
         for (int i = 0; i < numParts; i++) {
-            SnakeBody newPart = new SnakeBody(pane, tail);
+            SnakeBody newPart = new SnakeBody(pane, tail, player);
             tail = newPart;
             myBody.add(newPart);
         }
@@ -145,7 +155,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private boolean getTurnLeftKeyDown() {
 
         boolean keyPressed = false;
-        switch (controlKeys) {
+        switch (player) {
             case 1:
                 keyPressed = Globals.leftKeyDown;
                 break;
@@ -160,7 +170,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private boolean getTurnRightKeyDown() {
 
         boolean keyPressed = false;
-        switch (controlKeys) {
+        switch (player) {
             case 1:
                 keyPressed = Globals.rightKeyDown;
                 break;
@@ -175,7 +185,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private boolean getShootKeyDown() {
 
         boolean keyPressed = false;
-        switch (controlKeys) {
+        switch (player) {
             case 1:
                 keyPressed = Globals.upKeyDown;
                 break;
