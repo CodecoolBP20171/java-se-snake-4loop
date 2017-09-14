@@ -16,6 +16,7 @@ public class Globals {
 
     public static BorderPane root;
     public static SnakeHead snakeHeadEntity;
+    public static SnakeHead snakeHeadEntity2;
 
     public static final double ENEMY_CHASING_SPEED = 1.0;
     public static final double ENEMY_FLEEING_SPEED = 1.5;

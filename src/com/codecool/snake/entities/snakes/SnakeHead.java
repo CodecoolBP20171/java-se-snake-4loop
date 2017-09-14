@@ -27,13 +27,9 @@ public class SnakeHead extends GameEntity implements Animatable {
     private int score;
     private int player;
 
-    public void setScore(int score) {
-        this.score += score;
-    }
-
     private static int maxShootDelay = 29;
-    private int actualShootDelay;
 
+    private int actualShootDelay;
     private List<SnakeBody> myBody = new ArrayList<>();
 
     public SnakeHead(Pane pane, int xc, int yc, int player) {
@@ -49,15 +45,17 @@ public class SnakeHead extends GameEntity implements Animatable {
             case 1:
                 setImage(Globals.snakeHead);
                 Globals.isAlive1 = true;
+                Globals.snakeHeadEntity = this;
                 break;
             case 2:
                 setImage(Globals.snakeHead2);
                 Globals.isAlive2 = true;
+                Globals.snakeHeadEntity2 = this;
                 break;
         }
 
         pane.getChildren().add(this);
-        Globals.snakeHeadEntity = this;
+
 
         addPart(4);
     }
@@ -140,6 +138,10 @@ public class SnakeHead extends GameEntity implements Animatable {
                 }
             }
         }
+    }
+
+    public void setScore(int score) {
+        this.score += score;
     }
 
     public void addPart(int numParts) {
