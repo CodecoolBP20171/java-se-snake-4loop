@@ -17,11 +17,14 @@ public class Globals {
     public static BorderPane root;
     public static SnakeHead snakeHeadEntity;
 
-    public static final double ENEMY_CHASING_SPEED = 1.0;
-    public static final double ENEMY_FLEEING_SPEED = 1.5;
     public static final double ENTITY_CHASING_SPEED = 1.0;
-    public static final double ENTITY_FLEEING_SPEED = 1.2;
+
+    public static final double ENTITY_FLEEING_SPEED = 1.5;
     public static final double ENTITY_SPEED = 0.7;
+
+    public static final int SIMPLE_ENEMY_ATTACK_COOLDOWN = 120;
+    public static final int RECENTLY_SPAWNED_TIME = 240;
+    public static final int ENEMY_SHOOTING_COOLDOWN = 120;
 
     // max entity numbers
     public static final int MAX_ENTITY_NUMBER = 10;
@@ -32,9 +35,6 @@ public class Globals {
 
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
-    public static final int SIMPLE_ENEMY_ATTACK_COOLDOWN = 120;
-    public static final int RECENTLY_SPAWNED_TIME = 240;
-    public static final int ENEMY_SHOOTING_COOLDOWN = 120;
 
     public static boolean onePlayerMode;
 
@@ -42,17 +42,18 @@ public class Globals {
     public static Image title = new Image ("snake_main.png");
     public static Image snakeHead = new Image("snake_head.png");
     public static Image snakeBody = new Image("snake_body.png");
+
     public static Image simpleEnemy = new Image("simple_enemy.png");
+    public static Image chasingEnemy = new Image("simple_enemy.png");
+    public static Image shootingEnemy = new Image("simple_enemy.png");
+    public static Image testEnemy = new Image("simple_enemy.png");
+    public static Image paralyzedTestEnemy = new Image("paralyzed_simple_enemy.png");
+
     public static Image simplePowerup = new Image("powerup_berry.png");
     public static Image movingPowerup = new Image("powerup_berry.png");
     public static Image fugitivePowerup = new Image("powerup_berry.png");
+
     public static Image snakeShoot = new Image("shoot2.png");
-
-    public static Image paralyzedSimpleEnemy = new Image("paralyzed_simple_enemy.png");
-
-    public static Image powerupBerry = new Image("powerup_berry.png");
-
-    //.. put here the other images you want to use
 
     public static boolean leftKeyDown;
     public static boolean rightKeyDown;

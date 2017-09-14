@@ -15,7 +15,7 @@ import javafx.scene.layout.Pane;
 public class SimpleEnemy extends GameEntity implements Animatable, Interactable, BodyInteractable {
 
     private Point2D heading;
-    private static final int damage = 10;
+    private static final int DAMAGE = 10;
     private double direction;
     private double speed;
     private int attackCoolDown;
@@ -25,23 +25,25 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable,
 
         super(pane);
 
-        setImage(Globals.simpleEnemy);
+        setImage();
         pane.getChildren().add(this);
 
         recentlySpawned = Globals.RECENTLY_SPAWNED_TIME;
+        attackCoolDown = 0;
 
-        Double[] coords = Utils.getRandomSideCoordinates(); //
+        Double[] coords = Utils.getRandomSideCoordinates();
         setX(coords[0]);
         setY(coords[1]);
 
         direction = Utils.getRandomSideDirection(coords[0], coords[1]);
+        speed = Utils.getRandomSpeed(1, 3);
         setRotate(direction);
         heading = Utils.directionToVector(direction, speed);
 
-        speed = Utils.getRandomSpeed(1, 3);
-
         Globals.actualEnemies++;
     }
+
+    public void setImage() { setImage(Globals.simpleEnemy); }
 
     @Override
     public void step() {
@@ -61,8 +63,7 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable,
     @Override
     public void apply(SnakeHead player) {
         if (attackCoolDown < 1) {
-            // TODO: biting "animation" and/or sound
-            player.changeHealth(-damage);
+            player.changeHealth(-DAMAGE);
             attackCoolDown = Globals.SIMPLE_ENEMY_ATTACK_COOLDOWN;
         } else {
             attackCoolDown--;
@@ -73,8 +74,7 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable,
     @Override
     public void apply(SnakeBody player) {
         if (attackCoolDown < 1) {
-            // TODO: biting "animation" and/or sound
-            Globals.snakeHeadEntity.changeHealth(-damage/2);
+            Globals.snakeHeadEntity.changeHealth(-DAMAGE /2);
             attackCoolDown = Globals.SIMPLE_ENEMY_ATTACK_COOLDOWN;
         } else {
             attackCoolDown--;
@@ -88,18 +88,14 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable,
     }
 
     @Override
-    public void setSpeed(double speed) {
-
-    }
+    public void setSpeed(double speed) { this.speed = speed; }
 
     @Override
-    public void setDirection(double direction) {
-
-    }
+    public void setDirection(double direction) { this.direction = direction; }
 
     @Override
     public double getDirection() {
-        return 0;
+        return direction;
     }
 
     @Override

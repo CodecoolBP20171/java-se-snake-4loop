@@ -10,13 +10,13 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
-// a simple enemy TODO make better ones.
+
 public class ChasingEnemy extends GameEntity implements Animatable, Interactable, BodyInteractable {
 
     private Point2D heading;
-    private static final int damage = 10;
+    private static final int DAMAGE = 10;
     private double direction;
-    private double speed = 0.8;
+    private double speed;
     private Brain brain;
 
     public ChasingEnemy(Pane pane) {
@@ -24,7 +24,7 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
 
         this.brain = new Brain(Behavior.CHASING, this);
 
-        setImage(Globals.simpleEnemy);
+        setImage();
         pane.getChildren().add(this);
 
         Double[] coords = Utils.getRandomCoordinates();
@@ -33,18 +33,19 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
 
         direction = Utils.getRandomDirection();
         setRotate(direction);
+        speed = Globals.ENTITY_SPEED;
         heading = Utils.directionToVector(direction, speed);
 
         Globals.actualEnemies++;
     }
+
+    public void setImage() { setImage(Globals.chasingEnemy); }
 
     @Override
     public void step() {
         if (isOutOfBounds()) {
             destroy();
         }
-
-        speed = 0.8;
 
         brain.navigate();
 
@@ -57,13 +58,13 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
 
     @Override
     public void apply(SnakeHead player) {
-        player.changeHealth(-damage);
+        player.changeHealth(-DAMAGE);
         destroy();
     }
 
     @Override
     public void apply(SnakeBody snakeBody) {
-        Globals.snakeHeadEntity.changeHealth(-damage/2);
+        Globals.snakeHeadEntity.changeHealth(-DAMAGE /2);
         destroy();
     }
 
@@ -74,7 +75,7 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
 
     @Override
     public String getMessage() {
-        return "10 damage";
+        return "10 DAMAGE";
     }
 
 

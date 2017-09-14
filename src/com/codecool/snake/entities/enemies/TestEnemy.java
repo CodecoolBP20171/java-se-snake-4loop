@@ -12,9 +12,10 @@ import javafx.scene.layout.Pane;
 public class TestEnemy extends GameEntity implements Animatable, Interactable, BodyInteractable {
 
     private Point2D heading;
-    private static final int damage = 10;
+    private static final int DAMAGE = 10;
+    private static final int SCORE = 10;
     private double direction;
-    private double speed = 0.8;
+    private double speed;
     private Brain brain;
 
     private boolean paralyzed;
@@ -25,7 +26,7 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
 
         this.brain = new Brain(Behavior.CHASING, this);
 
-        setImage(Globals.simpleEnemy);
+        setImage();
         pane.getChildren().add(this);
 
         Double[] coords = Utils.getRandomCoordinates();
@@ -33,6 +34,7 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
         setY(coords[1]);
 
         direction = Utils.getRandomDirection();
+        speed = Globals.ENTITY_SPEED;
         setRotate(direction);
         heading = Utils.directionToVector(direction, speed);
 
@@ -41,11 +43,13 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
         Globals.actualEnemies++;
     }
 
+    public void setImage() { setImage(Globals.testEnemy); }
+
     @Override
     public void step() {
         if (paralyzedRoundCounter < 1){
             paralyzed = false;
-            setImage(Globals.simpleEnemy);
+            setImage();
             paralyzedRoundCounter = 180;
         }
 
@@ -53,7 +57,7 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
             speed = 0;
             paralyzedRoundCounter--;
         } else {
-            speed = 0.8;
+            speed = Globals.ENTITY_SPEED;
             if (isOutOfBounds()) {
                 destroy();
             }
@@ -73,10 +77,10 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
     @Override
     public void apply(SnakeHead player) {
         if (paralyzed){
-            // TODO: put here Jeannie's changeScore method
+            player.setScore(SCORE);
             System.out.println("Score increase");
         } else {
-            player.changeHealth(-damage);
+            player.changeHealth(-DAMAGE);
         }
         destroy();
     }
@@ -90,7 +94,7 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
         } else {
             System.out.println("Im am paralized");
             paralyzed = true;
-            setImage(Globals.paralyzedSimpleEnemy);
+            setImage(Globals.paralyzedTestEnemy);
 
         }
     }
@@ -103,7 +107,7 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
 
     @Override
     public String getMessage() {
-        return "10 damage";
+        return "10 DAMAGE";
     }
 
 

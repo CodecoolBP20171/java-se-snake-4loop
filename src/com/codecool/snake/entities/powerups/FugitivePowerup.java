@@ -26,7 +26,7 @@ public class FugitivePowerup extends MovingPowerup {
     }
 
     @Override
-    protected void setImage() {
+    public void setImage() {
         setImage(Globals.fugitivePowerup);
     }
 
