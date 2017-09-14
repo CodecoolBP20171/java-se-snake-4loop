@@ -22,7 +22,7 @@ public abstract class GameEntity extends ImageView {
             pane.getChildren().remove(this);
         }
 
-        GameEntityHandler.decrementEntityCountIfNeeded(this.getClass());
+        GameEntityHandler.decrementEntityCountIfNeeded(this.getClass().getSimpleName());
 
         Globals.removeGameObject(this);
     }

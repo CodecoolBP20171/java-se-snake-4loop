@@ -37,7 +37,7 @@ public class Utils {
     }
 
     public static int getRandomTime() {
-        return rnd.nextInt(10) * 60;
+        return rnd.nextInt(6) * 60;
     }
 
     public static double getRandomSpeed(double rangeMin, double rangeMax) {
@@ -74,4 +74,5 @@ public class Utils {
         coordinates[1] = (Globals.WINDOW_HEIGHT - 120) + 30 * rnd.nextDouble();
         return coordinates;
     }
+
 }

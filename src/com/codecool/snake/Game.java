@@ -40,17 +40,17 @@ public class Game extends Pane {
         new SimpleEnemy(this);*/
 
         new SimplePowerup(this);
+        /*new SimplePowerup(this);
         new SimplePowerup(this);
         new SimplePowerup(this);
-        new SimplePowerup(this);
-
-        new ShootingEnemy(this);
-        new ShootingEnemy(this);
+*/
+        /*new ShootingEnemy(this);
+        new ShootingEnemy(this);*/
         /*new ShootingEnemy(this);
         new ShootingEnemy(this);*/
 
-        new TestEnemy(this);
-        new TestEnemy(this);
+        /*new TestEnemy(this);
+        new TestEnemy(this);*/
         /*new TestEnemy(this);
         new TestEnemy(this);*/
     }
