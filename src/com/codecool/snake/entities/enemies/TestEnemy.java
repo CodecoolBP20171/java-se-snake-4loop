@@ -24,7 +24,7 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
     public TestEnemy(Pane pane) {
         super(pane);
 
-        this.brain = new Brain(Behavior.CHASING, this);
+        this.brain = new Brain(Behavior.HOMING, this);
 
         setImage();
         pane.getChildren().add(this);
@@ -33,8 +33,8 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
         setX(coords[0]);
         setY(coords[1]);
 
+        speed = Globals.ENTITY_HOMING_SPEED;
         direction = Utils.getRandomDirection();
-        speed = Globals.ENTITY_SPEED;
         setRotate(direction);
         heading = Utils.directionToVector(direction, speed);
 
@@ -82,6 +82,7 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
             player.setScore(SCORE);
             System.out.println("Score increase");
         } else {
+            Globals.snakeHeadEntity.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
             player.changeHealth(-DAMAGE);
         }
         destroy();
@@ -104,12 +105,13 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
     @Override
     public void apply(SnakeBody snakeBody) {
         Globals.snakeHeadEntity.changeHealth(-5);
+        snakeBody.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
         destroy();
     }
 
     @Override
     public String getMessage() {
-        return "10 DAMAGE";
+        return "10 damage";
     }
 
 

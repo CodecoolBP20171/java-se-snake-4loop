@@ -19,6 +19,9 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
     private double speed;
     private Brain brain;
 
+    private int swingTimer = 60;
+    private boolean swingToRight = false;
+
     public ChasingEnemy(Pane pane) {
         super(pane);
 
@@ -32,7 +35,7 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
         setY(coords[1]);
 
         direction = Utils.getRandomDirection();
-        setRotate(direction);
+        setRotate(-30);
         speed = Globals.ENTITY_SPEED;
         heading = Utils.directionToVector(direction, speed);
 
@@ -49,22 +52,35 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
 
         brain.navigate();
 
-        setRotate(direction);
-        heading = Utils.directionToVector(direction, speed);
+        // Swinging motion
+        if (swingTimer == 0 || swingTimer == 60) {
+            swingToRight = !swingToRight;
+        }
+        if (swingTimer > 0 && !swingToRight) {
+            setRotate(getRotate()+1);
+            swingTimer--;
+        } else if (swingTimer < 60 && swingToRight) {
+            setRotate(getRotate()-1);
+            swingTimer++;
+        }
 
+        heading = Utils.directionToVector(direction, speed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
     }
 
     @Override
     public void apply(SnakeHead player) {
+        Globals.snakeHeadEntity.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
         player.changeHealth(-DAMAGE);
         destroy();
     }
 
     @Override
     public void apply(SnakeBody snakeBody) {
-        Globals.snakeHeadEntity.changeHealth(-DAMAGE /2);
+        Globals.snakeHeadEntity.changeHealth(-DAMAGE/2);
+        snakeBody.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
+
         destroy();
     }
 

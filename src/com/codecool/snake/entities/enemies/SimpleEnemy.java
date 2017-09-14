@@ -63,23 +63,23 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable,
     @Override
     public void apply(SnakeHead player) {
         if (attackCoolDown < 1) {
+            Globals.snakeHeadEntity.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
             player.changeHealth(-DAMAGE);
             attackCoolDown = Globals.SIMPLE_ENEMY_ATTACK_COOLDOWN;
         } else {
             attackCoolDown--;
         }
-        // destroy();
     }
 
     @Override
-    public void apply(SnakeBody player) {
+    public void apply(SnakeBody snakeBody) {
         if (attackCoolDown < 1) {
             Globals.snakeHeadEntity.changeHealth(-DAMAGE /2);
+            snakeBody.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
             attackCoolDown = Globals.SIMPLE_ENEMY_ATTACK_COOLDOWN;
         } else {
             attackCoolDown--;
         }
-        // destroy();
     }
 
     @Override

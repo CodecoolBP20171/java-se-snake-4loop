@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 
 public enum ProjectileType {
     SNAKE_PROJECTILE (Globals.snakeShoot, 4),
-    STATIC_SHOOTER (Globals.enemyShoot, 2);
+    STATIC_SHOOTER (Globals.enemyShoot, 1.5f);
 
     private Image image;
     private float speed;

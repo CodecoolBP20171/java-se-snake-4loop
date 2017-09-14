@@ -60,12 +60,14 @@ public class ShootingEnemy extends GameEntity implements Animatable, Interactabl
     @Override
     public void apply(SnakeBody snakeBody) {
         Globals.snakeHeadEntity.changeHealth(-DAMAGE /2);
+        snakeBody.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
         destroy();
     }
 
     @Override
     public void apply(SnakeHead snakeHead) {
         Globals.snakeHeadEntity.changeHealth(-DAMAGE);
+        Globals.snakeHeadEntity.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
         destroy();
     }
 

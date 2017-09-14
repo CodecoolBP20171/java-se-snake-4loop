@@ -17,10 +17,9 @@ import javafx.scene.text.*;
 
 public class Game extends Pane {
 
-
     public Game() {
 
-        Globals.players.add(new SnakeHead(this, 500, 500));
+        Globals.players.add(new SnakeHead(this, 500, 330));
         Globals.pane = this;
 
         GameEntityHandler.countdownTimer = Utils.getRandomTime();
@@ -30,15 +29,33 @@ public class Game extends Pane {
         new FugitivePowerup(this);
 
         new ChasingEnemy(this);
+        new ChasingEnemy(this);
+        /*new ChasingEnemy(this);
+        new ChasingEnemy(this);*/
 
-        //new SimpleEnemy(this);
-        //new ShootingEnemy(this);
+        new SimpleEnemy(this);
+        new SimpleEnemy(this);
+        /*new SimpleEnemy(this);
+        new SimpleEnemy(this);*/
+
+        new SimplePowerup(this);
+        new SimplePowerup(this);
+        new SimplePowerup(this);
+        new SimplePowerup(this);
+
+        new ShootingEnemy(this);
+        new ShootingEnemy(this);
+        /*new ShootingEnemy(this);
+        new ShootingEnemy(this);*/
+
         new TestEnemy(this);
+        new TestEnemy(this);
+        /*new TestEnemy(this);
+        new TestEnemy(this);*/
     }
 
     public void start() {
         Scene scene = getScene();
-
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
@@ -76,10 +93,8 @@ public class Game extends Pane {
 
         Globals.root.setStyle("-fx-background-color: tan;");
 
-
         Globals.root.setCenter(textFlow);
 
     }
-
 
 }

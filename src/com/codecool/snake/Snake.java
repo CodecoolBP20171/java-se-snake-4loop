@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -23,7 +24,6 @@ public class Snake extends Application {
     public void start(Stage primaryStage) {
 
         primaryStage.setTitle("Snake Game");
-
 
         Scene scene = new Scene(root, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
         // primaryStage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
@@ -49,7 +49,8 @@ public class Snake extends Application {
         MenuItem newGame = new MenuItem("New Game");
         newGame.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                Globals.destroyAll();;
+                Globals.snakeBodyParts.clear();
+                Globals.destroyAll();
                 Game game = new Game();
                 root.setCenter(game);
                 game.start();
@@ -142,13 +143,8 @@ public class Snake extends Application {
         });
 
         menuSettings.getItems().addAll(playerMode, changeTheme);
-
         menuFile.getItems().addAll(newGame, new SeparatorMenuItem(), exit);
-
         primaryStage.setScene(scene);
-
         primaryStage.show();
-
     }
-
 }
