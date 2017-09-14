@@ -74,6 +74,8 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
 
     }
 
+    public void setImage() {setImage(Globals.testEnemy);}
+
     @Override
     public void apply(SnakeHead player) {
         if (paralyzed){

@@ -10,7 +10,7 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
-
+// a simple enemy TODO make better ones.
 public class ChasingEnemy extends GameEntity implements Animatable, Interactable, BodyInteractable {
 
     private Point2D heading;

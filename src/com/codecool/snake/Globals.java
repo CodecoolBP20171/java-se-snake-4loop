@@ -11,12 +11,17 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+
 // class for holding all static stuff
 public class Globals {
 
     public static BorderPane root;
     public static SnakeHead snakeHeadEntity;
 
+    public static String actualTheme = "sea";
+
+    public static final double ENEMY_CHASING_SPEED = 1.0;
+    public static final double ENEMY_FLEEING_SPEED = 1.5;
     public static final double ENTITY_CHASING_SPEED = 1.0;
 
     public static final double ENTITY_FLEEING_SPEED = 1.5;
@@ -40,20 +45,26 @@ public class Globals {
 
     // entity images
     public static Image title = new Image ("snake_main.png");
+    public static Image seaBackground = new Image("sea1.jpg");
+    public static Image wildwestBackround = new Image("wildwest.jpg");
     public static Image snakeHead = new Image("snake_head.png");
     public static Image snakeBody = new Image("snake_body.png");
-
-    public static Image simpleEnemy = new Image("simple_enemy.png");
-    public static Image chasingEnemy = new Image("simple_enemy.png");
-    public static Image shootingEnemy = new Image("simple_enemy.png");
-    public static Image testEnemy = new Image("simple_enemy.png");
-    public static Image paralyzedTestEnemy = new Image("paralyzed_simple_enemy.png");
-
-    public static Image simplePowerup = new Image("powerup_berry.png");
-    public static Image movingPowerup = new Image("powerup_berry.png");
-    public static Image fugitivePowerup = new Image("powerup_berry.png");
-
     public static Image snakeShoot = new Image("shoot2.png");
+
+    public static Image simplePowerup;
+    public static Image movingPowerup;
+    public static Image fugitivePowerup;
+
+    public static Image simpleEnemy;
+    public static Image shootingEnemy;
+    public static Image chasingEnemy;
+    public static Image testEnemy;
+    public static Image paralyzedTestEnemy;
+    public static Image enemyShoot;
+
+    public static Image powerupBerry = new Image("powerup_berry.png");
+
+    //.. put here the other images you want to use
 
     public static boolean leftKeyDown;
     public static boolean rightKeyDown;
@@ -73,6 +84,11 @@ public class Globals {
         oldGameObjects = new LinkedList<>();
         onePlayerMode = true;
         players = new ArrayList<>();
+        if (actualTheme.equals("sea")){
+            setSeaTheme();
+        } else if (actualTheme.equals("wildwest")){
+            setWildwestTheme();
+        }
     }
 
     public static void addGameObject(GameEntity toAdd) { newGameObjects.add(toAdd); }
@@ -97,4 +113,34 @@ public class Globals {
         Globals.gameObjects.clear();
         Globals.players.clear();
     }
+
+    static void setSeaTheme(){
+
+        simpleEnemy = new Image("sea/octopus.png");
+        shootingEnemy = new Image("sea/simple_enemy.png");
+        chasingEnemy = new Image("sea/goldfish.png");
+        testEnemy = new Image("sea/crab.png");
+        paralyzedTestEnemy = new Image("sea/crab_poisoned.png");
+        enemyShoot = new Image("sea/sea_enemy_projectile.png");
+
+        simplePowerup = new Image("sea/starfish.png");
+        movingPowerup = new Image("sea/happyfish.png");
+        fugitivePowerup = new Image("sea/goldfish.png");
+    }
+
+    static void setWildwestTheme(){
+
+        simpleEnemy = new Image("wildwest/bee.png");
+        shootingEnemy = new Image("wildwest/cowboy.png");
+        chasingEnemy = new Image("wildwest/hedgehog.png");
+        testEnemy = new Image("wildwest/pig.png");
+        paralyzedTestEnemy = new Image("wildwest/pig_poisoned.png");
+        enemyShoot = new Image("wildwest/wildwest_enemy_projectile.png");
+
+        simplePowerup = new Image("wildwest/lizard.png");
+        movingPowerup = new Image("wildwest/ladybird.png");
+        fugitivePowerup = new Image("wildwest/butterfly.png");
+
+    }
+
 }
