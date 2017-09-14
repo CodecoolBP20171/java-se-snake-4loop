@@ -48,9 +48,11 @@ public class SnakeHead extends GameEntity implements Animatable {
         switch (player) {
             case 1:
                 setImage(Globals.snakeHead);
+                Globals.isAlive1 = true;
                 break;
             case 2:
                 setImage(Globals.snakeHead2);
+                Globals.isAlive2 = true;
                 break;
         }
 
@@ -87,11 +89,30 @@ public class SnakeHead extends GameEntity implements Animatable {
         setY(getY() + heading.getY());
 
         // check for game over condition
-        if (isOutOfBounds() || health <= 0) {
-            Game.showEndScreen(score);
-            System.out.println("Game Over");
-            Globals.destroyAll();
+        if (Globals.onePlayerMode) {
+            if (isOutOfBounds() || health <= 0) {
+                Game.showEndScreen(score);
+                System.out.println("Game Over");
+                Globals.destroyAll();
+            }
+        } else {
+            if (isOutOfBounds() || health <= 0) {
+                switch (player) {
+                    case 1:
+                        Globals.isAlive1 = false;
+                        break;
+                    case 2:
+                        Globals.isAlive2 = false;
+                        break;
+                }
+            }
+
+            if (!Globals.isAlive1 && !Globals.isAlive2) {
+                System.out.println("Game Over");
+                Globals.gameLoop.stop();
+            }
         }
+
 
         // check if collided with an enemy or a powerup
         for (GameEntity entity : Globals.getGameObjects()) {

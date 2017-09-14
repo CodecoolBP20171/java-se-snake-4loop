@@ -74,6 +74,9 @@ public class Globals {
 
     static List<SnakeHead> players;
 
+    public static boolean isAlive1;
+    public static boolean isAlive2;
+
     static {
         root = new BorderPane();
         gameObjects = new LinkedList<>();
