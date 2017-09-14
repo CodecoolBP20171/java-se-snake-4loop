@@ -1,6 +1,12 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.GameEntity;
+import com.codecool.snake.entities.snakes.SnakeBody;
+import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Utils {
@@ -30,10 +36,32 @@ public class Utils {
     }
 
     public static Double[] getRandomCoordinates() {
+        SnakeHead snakeHead = Globals.snakeHeadEntity;
+        List<SnakeBody> bodyParts = Globals.snakeBodyParts;
         Double[] coordinates = new Double[2];
-        coordinates[0] = rnd.nextDouble() * Globals.WINDOW_WIDTH;
-        coordinates[1] = rnd.nextDouble() * Globals.WINDOW_HEIGHT;
+        int padding = 100;
+
+        do {
+            coordinates[0] = padding + rnd.nextDouble() * (Globals.WINDOW_WIDTH - padding*2);
+            coordinates[1] = padding + rnd.nextDouble() * (Globals.WINDOW_HEIGHT - padding*2);
+        } while (isCloseToSnake(snakeHead, bodyParts, coordinates));
+
         return coordinates;
+    }
+
+    private static boolean isCloseToSnake(SnakeHead snakeHead, List<SnakeBody> bodyParts, Double[] coordinates) {
+
+        if (Math.abs(snakeHead.getY() - coordinates[1]) < 150 && Math.abs(snakeHead.getX() - coordinates[0]) < 150) {
+            return true;
+        }
+
+        for (int i = 0; i < bodyParts.size(); i++) {
+            if (Math.abs(bodyParts.get(i).getY() - coordinates[1]) < 150 && Math.abs(bodyParts.get(i).getX() - coordinates[0]) < 150) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static int getRandomTime() {

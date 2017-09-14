@@ -9,10 +9,8 @@ import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.projectile.ProjectileType;
 import com.codecool.snake.entities.projectile.Projectile;
 import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class SnakeHead extends GameEntity implements Animatable {
@@ -24,10 +22,10 @@ public class SnakeHead extends GameEntity implements Animatable {
     private double direction;
     private int score;
 
+    private int damagedAnimationTimer;
+
     private static int maxShootDelay = 29;
     private int actualShootDelay;
-
-    private List<SnakeBody> myBody = new ArrayList<>();
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -46,6 +44,22 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void step() {
         if (actualShootDelay > 0){
             actualShootDelay--;
+        }
+
+        // Damaged animation
+        if (damagedAnimationTimer > 0) {
+            if (getImage().equals(Globals.snakeHead)) {
+                setImage(Globals.snakeHeadRed);
+            } else if (getImage().equals(Globals.snakeHeadRed)) {
+                setImage(Globals.snakeHeadPink);
+            } else if (getImage().equals(Globals.snakeHeadPink)) {
+                setImage(Globals.snakeHeadWhite);
+            } else if (getImage().equals(Globals.snakeHeadWhite)) {
+                setImage(Globals.snakeHeadRed);
+            }
+            damagedAnimationTimer--;
+        } else if (!getImage().equals(Globals.snakeHead)) {
+            setImage(Globals.snakeHead);
         }
 
         direction = getRotate();
@@ -88,12 +102,12 @@ public class SnakeHead extends GameEntity implements Animatable {
                     Interactable interactable = (Interactable) entity;
                     interactable.apply(this);
                     System.out.println(interactable.getMessage());
-                } else if (myBody.size() > 16 &&
-                        myBody.contains(entity) &&
-                        !entity.equals(myBody.get(0)) &&
-                        !entity.equals(myBody.get(1)) &&
-                        !entity.equals(myBody.get(2)) &&
-                        !entity.equals(myBody.get(3))){
+                } else if (Globals.snakeBodyParts.size() > 16 &&
+                        Globals.snakeBodyParts.contains(entity) &&
+                        !entity.equals(Globals.snakeBodyParts.get(0)) &&
+                        !entity.equals(Globals.snakeBodyParts.get(1)) &&
+                        !entity.equals(Globals.snakeBodyParts.get(2)) &&
+                        !entity.equals(Globals.snakeBodyParts.get(3))){
                     Game.showEndScreen(score);
                     System.out.println("Game Over");
                     Globals.destroyAll();
@@ -106,12 +120,11 @@ public class SnakeHead extends GameEntity implements Animatable {
         for (int i = 0; i < numParts; i++) {
             SnakeBody newPart = new SnakeBody(pane, tail);
             tail = newPart;
-            myBody.add(newPart);
+            Globals.snakeBodyParts.add(newPart);
         }
     }
 
     public void changeHealth(int diff) {
-        // TODO: if taking damage make damage taker part red for a bit (or whole worm)
         health += diff;
     }
 
@@ -127,10 +140,11 @@ public class SnakeHead extends GameEntity implements Animatable {
         System.out.println("Cannot do this.");
     }
 
-
     public int getHealth() {
         return health;
     }
 
-
+    public void setDamagedAnimationTimer(int damagedAnimationTimer) {
+        this.damagedAnimationTimer = damagedAnimationTimer;
+    }
 }

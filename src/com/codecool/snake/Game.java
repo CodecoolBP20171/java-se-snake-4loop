@@ -17,36 +17,38 @@ public class Game extends Pane {
 
     public Game() {
 
-        Globals.players.add(new SnakeHead(this, 500, 500));
+        Globals.players.add(new SnakeHead(this, 500, 330));
         Globals.pane = this;
 
-        new SimplePowerup(this);
+/*        new SimplePowerup(this);
         new MovingPowerup(this);
         new FugitivePowerup(this);
 
         new ChasingEnemy(this);
         new ChasingEnemy(this);
-        /*new ChasingEnemy(this);
-        new ChasingEnemy(this);*/
+        new ChasingEnemy(this);
+        new ChasingEnemy(this);
+        new ChasingEnemy(this);
+        new ChasingEnemy(this);
 
         new SimpleEnemy(this);
         new SimpleEnemy(this);
-        /*new SimpleEnemy(this);
-        new SimpleEnemy(this);*/
+        new SimpleEnemy(this);
+        new SimpleEnemy(this);
 
         new SimplePowerup(this);
         new SimplePowerup(this);
         new SimplePowerup(this);
-        new SimplePowerup(this);
+        new SimplePowerup(this);*/
 
         new ShootingEnemy(this);
         new ShootingEnemy(this);
-        /*new ShootingEnemy(this);
-        new ShootingEnemy(this);*/
+        new ShootingEnemy(this);
+        new ShootingEnemy(this);
 
+/*        new TestEnemy(this);
         new TestEnemy(this);
         new TestEnemy(this);
-        /*new TestEnemy(this);
         new TestEnemy(this);*/
     }
 

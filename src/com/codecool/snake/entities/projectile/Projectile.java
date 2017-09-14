@@ -84,11 +84,13 @@ public class Projectile extends GameEntity implements Animatable, Interactable, 
     @Override
     public void apply(SnakeHead snakeHead) {
         Globals.snakeHeadEntity.changeHealth(-10);
+        Globals.snakeHeadEntity.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
         destroy();
     }
 
     public void apply(SnakeBody snakeBody) {
         Globals.snakeHeadEntity.changeHealth(-5);
+        snakeBody.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
         destroy();
     }
 

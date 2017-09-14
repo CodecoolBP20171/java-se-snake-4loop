@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
+import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -16,16 +17,29 @@ public class Globals {
 
     public static BorderPane root;
     public static SnakeHead snakeHeadEntity;
+    public static List<SnakeBody> snakeBodyParts = new ArrayList<>();
 
-    public static final double ENEMY_CHASING_SPEED = 1.0;
-    public static final double ENEMY_FLEEING_SPEED = 1.5;
+    public static final int ENTITY_CHASING_RADIUS = 150;
+    public static final int ENTITY_FLEEING_RADIUS = 150;
+    public static final int ENTITY_HOMING_RADIUS = 1000;
+    public static final double ENTITY_HOMING_SPEED = 0.3;
+    public static final double ENTITY_CHASING_SPEED = 1.0;
+    public static final double ENTITY_FLEEING_SPEED = 1.3;
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
     public static final int SIMPLE_ENEMY_ATTACK_COOLDOWN = 120;
     public static final int RECENTLY_SPAWNED_TIME = 240;
     public static final int ENEMY_SHOOTING_COOLDOWN = 120;
+    public static final int DAMAGED_ANIMATION_TIME = 20;
 
     public static boolean onePlayerMode;
+
+    public static Image snakeHeadRed = new Image("snake_head_red.png");
+    public static Image snakeHeadPink = new Image("snake_head_pink.png");
+    public static Image snakeHeadWhite = new Image("snake_head_white.png");
+    public static Image snakeBodyRed = new Image("snake_body_red.png");
+    public static Image snakeBodyPink = new Image("snake_body_pink.png");
+    public static Image snakeBodyWhite = new Image("snake_body_white.png");
 
     public static Image title = new Image ("snake_main.png");
     public static Image snakeHead = new Image("snake_head.png");

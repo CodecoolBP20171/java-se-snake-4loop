@@ -4,8 +4,6 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.snakes.SnakeHead;
 
-import java.util.Random;
-
 public class Brain {
 
     private Behavior behavior;
@@ -58,8 +56,7 @@ public class Brain {
             ((Animatable) body).setDirection(Utils.deltaCoordsToDirection(deltaX, deltaY) + behavior.direction());
 
             Animatable animatable = (Animatable) body;
-            animatable.setSpeed((behavior.equals(Behavior.CHASING)) ?
-                    Globals.ENEMY_CHASING_SPEED : Globals.ENEMY_FLEEING_SPEED);
+            animatable.setSpeed(behavior.speed());
         }
 
     }
@@ -87,7 +84,7 @@ public class Brain {
 
     private boolean isCloseToSnakeHead() {
         SnakeHead snakeHead = Globals.snakeHeadEntity;
-        return (Math.abs(snakeHead.getBoundsInParent().getMaxX() - body.getBoundsInParent().getMaxX()) < 120 &&
-                Math.abs(snakeHead.getBoundsInParent().getMaxY() - body.getBoundsInParent().getMaxY()) < 120);
+        return (Math.abs(snakeHead.getBoundsInParent().getMaxX() - body.getBoundsInParent().getMaxX()) < behavior.radius() &&
+                Math.abs(snakeHead.getBoundsInParent().getMaxY() - body.getBoundsInParent().getMaxY()) < behavior.radius());
     }
 }
