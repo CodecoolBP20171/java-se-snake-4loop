@@ -21,6 +21,9 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
     private boolean paralyzed;
     private int paralyzedRoundCounter = 180;
 
+    private int swingTimer = 60;
+    private boolean swingToRight = false;
+
     public TestEnemy(Pane pane) {
         super(pane);
 
@@ -35,10 +38,11 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
 
         speed = Globals.ENTITY_HOMING_SPEED;
         direction = Utils.getRandomDirection();
-        setRotate(direction);
+        setRotate(-30);
         heading = Utils.directionToVector(direction, speed);
 
         paralyzed = false;
+
 
         Globals.actualEnemies++;
     }
@@ -51,6 +55,18 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
             paralyzedRoundCounter = 180;
         }
 
+        // Swinging motion
+        if (swingTimer == 0 || swingTimer == 60) {
+            swingToRight = !swingToRight;
+        }
+        if (swingTimer > 0 && !swingToRight) {
+            setRotate(getRotate()+1);
+            swingTimer--;
+        } else if (swingTimer < 60 && swingToRight) {
+            setRotate(getRotate()-1);
+            swingTimer++;
+        }
+
         if (paralyzed){
             speed = 0;
             paralyzedRoundCounter--;
@@ -60,12 +76,8 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
                 destroy();
             }
 
-
             brain.navigate();
-
-            setRotate(direction);
             heading = Utils.directionToVector(direction, speed);
-
             setX(getX() + heading.getX());
             setY(getY() + heading.getY());
         }

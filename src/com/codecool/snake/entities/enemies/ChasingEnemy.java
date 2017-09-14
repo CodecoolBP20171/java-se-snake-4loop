@@ -107,4 +107,5 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
     public double getDirection() {
         return direction;
     }
+
 }

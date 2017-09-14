@@ -85,13 +85,13 @@ public class Utils {
         boolean onLeftSide = x < Globals.WINDOW_WIDTH/2;
         boolean closeToTop = y < Globals.WINDOW_HEIGHT/2;
         if (onLeftSide && closeToTop) {
-            direction = 120 + (135 - 120) * rnd.nextDouble();
+            direction = 100 + (135 - 100) * rnd.nextDouble();
         } else if (onLeftSide && !closeToTop) {
-            direction = 30 + (60 - 30) * rnd.nextDouble();
+            direction = 50 + (60 - 50) * rnd.nextDouble();
         } else if (!onLeftSide && closeToTop) {
-            direction = 210 + (240 - 210) * rnd.nextDouble();
+            direction = 230 + (240 - 230) * rnd.nextDouble();
         } else {
-            direction = 300 + (330 - 300) * rnd.nextDouble();
+            direction = 280 + (330 - 280) * rnd.nextDouble();
         }
         return direction;
     }

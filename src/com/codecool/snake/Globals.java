@@ -31,7 +31,7 @@ public class Globals {
 
     public static final int SIMPLE_ENEMY_ATTACK_COOLDOWN = 120;
     public static final int RECENTLY_SPAWNED_TIME = 240;
-    public static final int ENEMY_SHOOTING_COOLDOWN = 120;
+    public static final int ENEMY_SHOOTING_COOLDOWN = 300;
     public static final int DAMAGED_ANIMATION_TIME = 20;
 
     // max entity numbers
@@ -61,8 +61,10 @@ public class Globals {
     public static Image snakeShoot = new Image("shoot2.png");
 
     public static Image simplePowerup;
-    public static Image movingPowerup;
-    public static Image fugitivePowerup;
+    public static Image movingPowerupLeft;
+    public static Image movingPowerupRight;
+    public static Image fugitivePowerupLeft;
+    public static Image fugitivePowerupRight;
 
     public static Image simpleEnemyToRight;
     public static Image simpleEnemyToLeft;
@@ -125,14 +127,16 @@ public class Globals {
         simpleEnemyToRight = new Image("sea/shark_right_side.png");
         simpleEnemyToLeft = new Image("sea/shark_left_side.png");
         shootingEnemy = new Image("sea/simple_enemy.png");
-        chasingEnemy = new Image("sea/goldfish.png");
+        chasingEnemy = new Image("sea/octopus.png");
         testEnemy = new Image("sea/crab.png");
         paralyzedTestEnemy = new Image("sea/crab_poisoned.png");
         enemyShoot = new Image("sea/sea_enemy_projectile.png");
 
         simplePowerup = new Image("sea/starfish.png");
-        movingPowerup = new Image("sea/happyfish.png");
-        fugitivePowerup = new Image("sea/goldfish.png");
+        movingPowerupLeft = new Image("sea/happyfish_left.png");
+        movingPowerupRight = new Image("sea/happyfish_right.png");
+        fugitivePowerupLeft = new Image("sea/goldfish_left.png");
+        fugitivePowerupRight = new Image("sea/goldfish_right.png");
     }
 
     static void setWildwestTheme(){
@@ -146,8 +150,10 @@ public class Globals {
         enemyShoot = new Image("wildwest/wildwest_enemy_projectile.png");
 
         simplePowerup = new Image("wildwest/lizard.png");
-        movingPowerup = new Image("wildwest/ladybird.png");
-        fugitivePowerup = new Image("wildwest/butterfly.png");
+        movingPowerupLeft = new Image("wildwest/ladybird.png");
+        movingPowerupRight = new Image("wildwest/ladybird.png");
+        fugitivePowerupLeft = new Image("wildwest/butterfly.png");
+        fugitivePowerupRight = new Image("wildwest/butterfly.png");
 
     }
 }

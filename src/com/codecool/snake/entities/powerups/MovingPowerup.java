@@ -27,7 +27,7 @@ public class MovingPowerup extends SimplePowerup implements Animatable {
             setY(coords[1]);
             this.direction = Utils.getRandomSideDirection(coords[0], coords[1]);
 
-            setRotate(direction);
+            //setRotate(direction);
             this.heading = Utils.directionToVector(direction, speed);
 
             this.recentlySpawned = Globals.RECENTLY_SPAWNED_TIME;
@@ -36,7 +36,13 @@ public class MovingPowerup extends SimplePowerup implements Animatable {
 
         @Override
         public void setImage() {
-            setImage(Globals.movingPowerup);
+            if (getDirection() >= 0 && getDirection() <= 180) {
+                setImage(Globals.movingPowerupRight);
+                setRotate(getDirection()-90);
+            } else {
+                setImage(Globals.movingPowerupLeft);
+                setRotate(getDirection()+90);
+            }
         }
 
         @Override
@@ -62,7 +68,7 @@ public class MovingPowerup extends SimplePowerup implements Animatable {
                 destroy();
             } else {
                 recentlySpawned--;
-                setRotate(direction);
+                setImage();
                 heading = Utils.directionToVector(direction, speed);
 
                 setX(getX() + heading.getX());
