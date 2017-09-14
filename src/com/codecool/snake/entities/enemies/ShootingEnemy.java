@@ -21,7 +21,7 @@ public class ShootingEnemy extends GameEntity implements Animatable, Interactabl
         super(pane);
         shootingCooldown = Globals.ENEMY_SHOOTING_COOLDOWN;
 
-        setImage(Globals.simpleEnemy);
+        setImage();
         pane.getChildren().add(this);
 
         Double[] coords = Utils.getRandomBottomCoordinates();
@@ -30,6 +30,8 @@ public class ShootingEnemy extends GameEntity implements Animatable, Interactabl
 
         Globals.actualEnemies++;
     }
+
+    public void setImage() {setImage(Globals.shootingEnemy);}
 
     @Override
     public void step() {

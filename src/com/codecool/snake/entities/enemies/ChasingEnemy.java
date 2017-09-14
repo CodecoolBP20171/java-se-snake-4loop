@@ -24,7 +24,7 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
 
         this.brain = new Brain(Behavior.CHASING, this);
 
-        setImage(Globals.simpleEnemy);
+        setImage();
         pane.getChildren().add(this);
 
         Double[] coords = Utils.getRandomCoordinates();
@@ -37,6 +37,8 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
 
         Globals.actualEnemies++;
     }
+
+    public void setImage() {setImage(Globals.chasingEnemy);}
 
     @Override
     public void step() {

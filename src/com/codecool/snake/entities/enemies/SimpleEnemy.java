@@ -25,7 +25,7 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable,
 
         super(pane);
 
-        setImage(Globals.simpleEnemy);
+        setImage();
         pane.getChildren().add(this);
 
         recentlySpawned = Globals.RECENTLY_SPAWNED_TIME;
@@ -42,6 +42,9 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable,
 
         Globals.actualEnemies++;
     }
+
+    public void setImage() {setImage(Globals.simpleEnemy);}
+
 
     @Override
     public void step() {

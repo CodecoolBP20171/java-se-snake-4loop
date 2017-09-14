@@ -25,7 +25,7 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
 
         this.brain = new Brain(Behavior.CHASING, this);
 
-        setImage(Globals.simpleEnemy);
+        setImage();
         pane.getChildren().add(this);
 
         Double[] coords = Utils.getRandomCoordinates();
@@ -45,7 +45,7 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
     public void step() {
         if (paralyzedRoundCounter < 1){
             paralyzed = false;
-            setImage(Globals.simpleEnemy);
+            setImage();
             paralyzedRoundCounter = 180;
         }
 
@@ -70,6 +70,8 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
 
     }
 
+    public void setImage() {setImage(Globals.testEnemy);}
+
     @Override
     public void apply(SnakeHead player) {
         if (paralyzed){
@@ -90,7 +92,7 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
         } else {
             System.out.println("Im am paralized");
             paralyzed = true;
-            setImage(Globals.paralyzedSimpleEnemy);
+            setImage(Globals.paralyzedTestEnemy);
 
         }
     }
