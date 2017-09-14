@@ -38,14 +38,15 @@ public class Globals {
     public static final int MAX_ENTITY_NUMBER = 10;
     public static final int MAX_ENEMY_NUMBER = 8;
     public static final int MAX_PUP_NUMBER = 7;
-    public static int actualPowerUps;
-    public static int actualEnemies;
+    public static int actualPowerUps = 0;
+    public static int actualEnemies = 0;
 
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
 
     public static boolean onePlayerMode;
 
+    public static Image bloodSpatter = new Image("blood_spatter.png");
     public static Image snakeHeadRed = new Image("snake_head_red.png");
     public static Image snakeHeadPink = new Image("snake_head_pink.png");
     public static Image snakeHeadWhite = new Image("snake_head_white.png");
@@ -54,10 +55,8 @@ public class Globals {
     public static Image snakeBodyWhite = new Image("snake_body_white.png");
 
     public static Image title = new Image ("snake_main.png");
-    public static Image seaBackground = new Image("sea1.jpg");
-    public static Image wildwestBackround = new Image("wildwest.jpg");
-    public static Image snakeHead = new Image("snake_head.png");
-    public static Image snakeBody = new Image("snake_body.png");
+    public static Image snakeHead;
+    public static Image snakeBody;
     public static Image snakeShoot = new Image("shoot2.png");
 
     public static Image simplePowerup;
@@ -123,7 +122,8 @@ public class Globals {
     }
 
     static void setSeaTheme(){
-
+        snakeHead = new Image("snake_head_sea_grey.png");
+        snakeBody = new Image("snake_body_sea_grey.png");
         simpleEnemyToRight = new Image("sea/shark_right_side.png");
         simpleEnemyToLeft = new Image("sea/shark_left_side.png");
         shootingEnemy = new Image("sea/simple_enemy.png");
@@ -140,20 +140,20 @@ public class Globals {
     }
 
     static void setWildwestTheme(){
-
-        simpleEnemyToRight = new Image("wildwest/bee.png");
-        simpleEnemyToLeft = new Image("wildwest/bee.png");
+        snakeHead = new Image("snake_head_wild_west.png");
+        snakeBody = new Image("snake_body_wild_west.png");
+        simpleEnemyToRight = new Image("wildwest/vulture_right.png");
+        simpleEnemyToLeft = new Image("wildwest/vulture_left.png");
         shootingEnemy = new Image("wildwest/cowboy.png");
-        chasingEnemy = new Image("wildwest/hedgehog.png");
-        testEnemy = new Image("wildwest/pig.png");
-        paralyzedTestEnemy = new Image("wildwest/pig_poisoned.png");
+        chasingEnemy = new Image("wildwest/bee.png");
+        testEnemy = new Image("wildwest/hedgehog.png");
+        paralyzedTestEnemy = new Image("wildwest/hedgehog_poisoned.png");
         enemyShoot = new Image("wildwest/wildwest_enemy_projectile.png");
 
-        simplePowerup = new Image("wildwest/lizard.png");
-        movingPowerupLeft = new Image("wildwest/ladybird.png");
-        movingPowerupRight = new Image("wildwest/ladybird.png");
-        fugitivePowerupLeft = new Image("wildwest/butterfly.png");
-        fugitivePowerupRight = new Image("wildwest/butterfly.png");
-
+        simplePowerup = new Image("wildwest/egg.png");
+        movingPowerupLeft = new Image("wildwest/mouse_goes_left.png");
+        movingPowerupRight = new Image("wildwest/mouse_goes_right.png");
+        fugitivePowerupLeft = new Image("wildwest/ladybird_goes_left.png");
+        fugitivePowerupRight = new Image("wildwest/ladybird_goes_right.png");
     }
 }

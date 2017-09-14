@@ -10,7 +10,6 @@ public abstract class GameEntity extends ImageView {
 
     protected Pane pane;
 
-
     protected GameEntity(Pane pane) {
         this.pane = pane;
         // add to the main loop.

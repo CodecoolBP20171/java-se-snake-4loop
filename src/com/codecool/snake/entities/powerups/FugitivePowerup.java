@@ -52,12 +52,10 @@ public class FugitivePowerup extends MovingPowerup {
 
     @Override
     public void apply(SnakeHead snakeHead) {
-        snakeHead.addPart(1);
         snakeHead.setScore(FugitivePowerup.VALUE);
-        snakeHead.changeHealth(10);
+        snakeHead.changeHealth(20);
         destroy();
     }
-
 
     public void setSpeed(double speed) {
         this.speed = speed;

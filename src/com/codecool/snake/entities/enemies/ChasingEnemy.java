@@ -73,6 +73,8 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
     public void apply(SnakeHead player) {
         Globals.snakeHeadEntity.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
         player.changeHealth(-DAMAGE);
+        Double[] coords = {getX(), getY()};
+        new BloodSpatter(Globals.pane, coords);
         destroy();
     }
 
@@ -80,12 +82,15 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
     public void apply(SnakeBody snakeBody) {
         Globals.snakeHeadEntity.changeHealth(-DAMAGE/2);
         snakeBody.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
-
+        Double[] coords = {getX(), getY()};
+        new BloodSpatter(Globals.pane, coords);
         destroy();
     }
 
     @Override
     public void apply(Projectile projectile) {
+        Double[] coords = {getX(), getY()};
+        new BloodSpatter(Globals.pane, coords);
         destroy();
     }
 

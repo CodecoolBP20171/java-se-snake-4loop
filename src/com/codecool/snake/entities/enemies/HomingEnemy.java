@@ -9,7 +9,7 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
-public class TestEnemy extends GameEntity implements Animatable, Interactable, BodyInteractable {
+public class HomingEnemy extends GameEntity implements Animatable, Interactable, BodyInteractable {
 
     private Point2D heading;
     private static final int DAMAGE = 10;
@@ -24,7 +24,7 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
     private int swingTimer = 60;
     private boolean swingToRight = false;
 
-    public TestEnemy(Pane pane) {
+    public HomingEnemy(Pane pane) {
         super(pane);
 
         this.brain = new Brain(Behavior.HOMING, this);
@@ -89,26 +89,25 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
     @Override
     public void apply(SnakeHead player) {
         if (paralyzed){
+            Globals.snakeHeadEntity.changeHealth(20);
             player.setScore(SCORE);
-            System.out.println("Score increase");
         } else {
             Globals.snakeHeadEntity.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
             player.changeHealth(-DAMAGE);
+            Double[] coords = {getX(), getY()};
+            new BloodSpatter(Globals.pane, coords);
         }
+
         destroy();
     }
 
     @Override
     public void apply(Projectile projectile) {
-        System.out.println("SHOOTED");
         if (paralyzed){
-            System.out.println("I am dead.");
             paralyzedRoundCounter = 180;
         } else {
-            System.out.println("Im am paralized");
             paralyzed = true;
             setImage(Globals.paralyzedTestEnemy);
-
         }
     }
 
@@ -116,6 +115,8 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
     public void apply(SnakeBody snakeBody) {
         Globals.snakeHeadEntity.changeHealth(-5);
         snakeBody.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
+        Double[] coords = {getX(), getY()};
+        new BloodSpatter(Globals.pane, coords);
         destroy();
     }
 

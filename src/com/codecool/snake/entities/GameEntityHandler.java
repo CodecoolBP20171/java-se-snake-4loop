@@ -5,7 +5,7 @@ import com.codecool.snake.Utils;
 import com.codecool.snake.entities.enemies.ChasingEnemy;
 import com.codecool.snake.entities.enemies.ShootingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
-import com.codecool.snake.entities.enemies.TestEnemy;
+import com.codecool.snake.entities.enemies.HomingEnemy;
 import com.codecool.snake.entities.powerups.FugitivePowerup;
 import com.codecool.snake.entities.powerups.MovingPowerup;
 import com.codecool.snake.entities.powerups.SimplePowerup;
@@ -105,7 +105,7 @@ public class GameEntityHandler {
                         new SimpleEnemy(Globals.pane);
                         break;
                     case 3:
-                        new TestEnemy(Globals.pane);
+                        new HomingEnemy(Globals.pane);
                         break;
                 }
 
@@ -133,7 +133,7 @@ public class GameEntityHandler {
             case "SimplePowerup": case "MovingPowerup": case "FugitivePowerup":
                 Globals.actualPowerUps--;
                 break;
-            case "ChasingEnemy": case "ShootingEnemy": case "SimpleEnemy": case "TestEnemy":
+            case "ChasingEnemy": case "ShootingEnemy": case "SimpleEnemy": case "HomingEnemy":
                 Globals.actualEnemies--;
         }
 

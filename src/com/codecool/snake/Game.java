@@ -2,7 +2,7 @@ package com.codecool.snake;
 
 
 import com.codecool.snake.entities.GameEntityHandler;
-import com.codecool.snake.entities.enemies.TestEnemy;
+import com.codecool.snake.entities.enemies.HomingEnemy;
 import com.codecool.snake.entities.enemies.ChasingEnemy;
 import com.codecool.snake.entities.enemies.ShootingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
@@ -25,33 +25,15 @@ public class Game extends Pane {
         GameEntityHandler.countdownTimer = Utils.getRandomTime();
 
         new SimplePowerup(this);
+        new SimplePowerup(this);
         new MovingPowerup(this);
         new FugitivePowerup(this);
 
         new ChasingEnemy(this);
-        new ChasingEnemy(this);
-        /*new ChasingEnemy(this);
-        new ChasingEnemy(this);*/
-
         new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        /*new SimpleEnemy(this);
-        new SimpleEnemy(this);*/
-
-        new SimplePowerup(this);
-        new SimplePowerup(this);
-        new SimplePowerup(this);
-        new SimplePowerup(this);
-
         new ShootingEnemy(this);
-        new ShootingEnemy(this);
-        /*new ShootingEnemy(this);
-        new ShootingEnemy(this);*/
+        new HomingEnemy(this);
 
-        new TestEnemy(this);
-        new TestEnemy(this);
-        /*new TestEnemy(this);
-        new TestEnemy(this);*/
     }
 
     public void start() {

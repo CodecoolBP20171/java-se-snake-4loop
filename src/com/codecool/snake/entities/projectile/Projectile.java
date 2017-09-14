@@ -11,7 +11,7 @@ import com.codecool.snake.entities.enemies.ShootingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
-import com.codecool.snake.entities.enemies.TestEnemy;
+import com.codecool.snake.entities.enemies.HomingEnemy;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
@@ -28,7 +28,10 @@ public class Projectile extends GameEntity implements Animatable, Interactable, 
         this.projectileType = projectileType;
         setX(x);
         setY(y);
-        setImage(projectileType.getImage());
+
+        setImage(projectileType.equals(ProjectileType.SNAKE_PROJECTILE) ?
+                projectileType.getImage() : Globals.enemyShoot);
+
         this.speed = projectileType.getSpeed();
         pane.getChildren().add(this);
         shootDir = dir;
@@ -69,7 +72,7 @@ public class Projectile extends GameEntity implements Animatable, Interactable, 
                 }
 
                 if (projectileType.equals(ProjectileType.SNAKE_PROJECTILE)) {
-                    if (entity instanceof ChasingEnemy || entity instanceof SimpleEnemy || entity instanceof ShootingEnemy || entity instanceof TestEnemy) {
+                    if (entity instanceof ChasingEnemy || entity instanceof SimpleEnemy || entity instanceof ShootingEnemy || entity instanceof HomingEnemy) {
                         Interactable interactable = (Interactable) entity;
                         interactable.apply(this);
                         destroy();
