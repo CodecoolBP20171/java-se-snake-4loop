@@ -16,7 +16,7 @@ import javafx.scene.layout.Pane;
 public class SnakeHead extends GameEntity implements Animatable {
 
     private static final float speed = 2.5f;
-    private static final float turnRate = 3f;
+    private static final float turnRate = 2.5f;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private static final int MAX_HEALTH = 100;
     private int health;
@@ -25,8 +25,13 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     private int damagedAnimationTimer;
 
+    public int getScore() {
+        return score;
+    }
+
     public void setScore(int score) {
         this.score += score;
+
     }
 
     private static int maxShootDelay = 29;
@@ -107,14 +112,14 @@ public class SnakeHead extends GameEntity implements Animatable {
                     Interactable interactable = (Interactable) entity;
                     interactable.apply(this);
                     System.out.println(interactable.getMessage());
-                } else if (Globals.snakeBodyParts.size() > 16 &&
+                } else if (Globals.snakeBodyParts.size() > 7  &&
                         Globals.snakeBodyParts.contains(entity) &&
                         !entity.equals(Globals.snakeBodyParts.get(0)) &&
                         !entity.equals(Globals.snakeBodyParts.get(1)) &&
                         !entity.equals(Globals.snakeBodyParts.get(2)) &&
                         !entity.equals(Globals.snakeBodyParts.get(3))){
                     Game.showEndScreen(score);
-                    System.out.println("Game Over");
+                    System.out.println("Game Over Suicide");
                     Globals.destroyAll();
                 }
             }

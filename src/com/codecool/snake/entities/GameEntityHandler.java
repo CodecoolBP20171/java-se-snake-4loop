@@ -36,7 +36,6 @@ public class GameEntityHandler {
         }
     }
 
-
     private static void checkEntities() {
 
         if (entityQueue.size() < Globals.MAX_ENTITY_NUMBER) {
@@ -66,27 +65,18 @@ public class GameEntityHandler {
                         int randomMissingEntityIndex = Utils.getRandomInt(missingEntities.size());
                         entityQueue.add(missingEntities.remove(randomMissingEntityIndex));
                     }
-
-                    addTimer();
-
                 }
-
             }
 
             missingEntities.clear();
         }
-
     }
 
-
     private static void addTimer() {
-
         if (countdownTimer == 0) {
             countdownTimer = Utils.getRandomTime();
         }
-
     }
-
 
     private static void addNewEntityIfNeeded() {
 
@@ -124,21 +114,21 @@ public class GameEntityHandler {
                 }
             }
         }
-
     }
 
     public static void decrementEntityCountIfNeeded(String className) {
 
         switch (className) {
-            case "SimplePowerup": case "MovingPowerup": case "FugitivePowerup":
+            case "SimplePowerup":
+            case "MovingPowerup":
+            case "FugitivePowerup":
                 Globals.actualPowerUps--;
                 break;
-            case "ChasingEnemy": case "ShootingEnemy": case "SimpleEnemy": case "HomingEnemy":
+            case "ChasingEnemy":
+            case "ShootingEnemy":
+            case "SimpleEnemy":
+            case "HomingEnemy":
                 Globals.actualEnemies--;
         }
-
     }
-
-
-
 }

@@ -100,7 +100,6 @@ public class Globals {
 
     public static void addGameObject(GameEntity toAdd) { newGameObjects.add(toAdd); }
 
-
     public static void removeGameObject(GameEntity toRemove) {
         oldGameObjects.add(toRemove);
     }
@@ -119,6 +118,9 @@ public class Globals {
         Globals.oldGameObjects.clear();
         Globals.gameObjects.clear();
         Globals.players.clear();
+
+        actualEnemies = 0;
+        actualPowerUps = 0;
     }
 
     static void setSeaTheme(){

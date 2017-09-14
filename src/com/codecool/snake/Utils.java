@@ -1,11 +1,8 @@
 package com.codecool.snake;
 
-import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -14,9 +11,9 @@ public class Utils {
     private static Random rnd = new Random();
 
     /*
-        Converts a direction in degrees (0...360) to x and y coordinates.
-        The length of this vector is the second parameter
-        */
+    Converts a direction in degrees (0...360) to x and y coordinates.
+    The length of this vector is the second parameter
+    */
     public static Point2D directionToVector(double directionInDegrees, double length) {
         double directionInRadians = directionInDegrees / 180 * Math.PI;
         Point2D heading = new Point2D(length * Math.sin(directionInRadians), - length * Math.cos(directionInRadians));
@@ -65,7 +62,7 @@ public class Utils {
     }
 
     public static int getRandomTime() {
-        return rnd.nextInt(6) * 60;
+        return rnd.nextInt(5) * 60;
     }
 
     public static double getRandomSpeed(double rangeMin, double rangeMax) {

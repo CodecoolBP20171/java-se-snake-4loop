@@ -33,13 +33,13 @@ public class GameLoop extends AnimationTimer {
     }
 
     void healthBar(){
-        Text message = new Text("PLAYER 1   Health: " + Globals.players.get(0).getHealth());
+        Text message = new Text("PLAYER 1   Health: " + Globals.players.get(0).getHealth() + "    Score: " + Globals.players.get(0).getScore());
         message.setFill(Color.GREEN);
         message.setFont(Font.font("Sans", FontWeight.BOLD, 14));
         TextFlow textFlow;
 
         if (Globals.players.size() > 1){
-            Text message2 = new Text("PLAYER 2   Health: " + Globals.players.get(1).getHealth());
+            Text message2 = new Text("PLAYER 2   Health: " + Globals.players.get(1).getHealth() + "    Score: " + Globals.players.get(1).getScore());
             message2.setFill(Color.BLUE);
             message2.setFont(Font.font("Sans", FontWeight.BOLD, 14));
             Text separator = new Text("\n");
