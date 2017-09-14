@@ -15,7 +15,6 @@ import javafx.scene.text.*;
 
 public class Game extends Pane {
 
-
     public Game() {
 
         Globals.players.add(new SnakeHead(this, 500, 500, 1));
@@ -118,10 +117,8 @@ public class Game extends Pane {
 
         Globals.root.setStyle("-fx-background-color: tan;");
 
-
         Globals.root.setCenter(textFlow);
 
     }
-
 
 }

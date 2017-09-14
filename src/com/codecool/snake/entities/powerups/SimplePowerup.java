@@ -8,8 +8,8 @@ import com.codecool.snake.entities.projectile.Projectile;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
 
-
-// a simple powerup that makes the snake grow
+/* Stand at a random fix point of the screen until catched
+ */
 public class SimplePowerup extends GameEntity implements Interactable {
 
     private static final int VALUE = 2;
@@ -26,7 +26,7 @@ public class SimplePowerup extends GameEntity implements Interactable {
         setY(coord[1]);
     }
 
-    protected void setImage() {
+    public void setImage() {
         setImage(Globals.simplePowerup);
     }
 

@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
+import com.codecool.snake.entities.snakes.SnakeBody;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -17,12 +18,24 @@ public class Globals {
     public static BorderPane root;
     public static SnakeHead snakeHeadEntity;
     public static SnakeHead snakeHeadEntity2;
+    public static List<SnakeBody> snakeBodyParts = new ArrayList<>();
 
-    public static final double ENEMY_CHASING_SPEED = 1.0;
+    public static String actualTheme = "sea";
+
+    static final double ENEMY_CHASING_SPEED = 1.0;
     public static final double ENEMY_FLEEING_SPEED = 1.5;
-    public static final double ENTITY_CHASING_SPEED = 1.0;
-    public static final double ENTITY_FLEEING_SPEED = 1.2;
     public static final double ENTITY_SPEED = 0.7;
+    public static final int ENTITY_CHASING_RADIUS = 150;
+    public static final int ENTITY_FLEEING_RADIUS = 150;
+    public static final int ENTITY_HOMING_RADIUS = 1000;
+    public static final double ENTITY_HOMING_SPEED = 0.3;
+    public static final double ENTITY_CHASING_SPEED = 1.0;
+    public static final double ENTITY_FLEEING_SPEED = 1.3;
+
+    public static final int SIMPLE_ENEMY_ATTACK_COOLDOWN = 120;
+    public static final int RECENTLY_SPAWNED_TIME = 240;
+    public static final int ENEMY_SHOOTING_COOLDOWN = 300;
+    public static final int DAMAGED_ANIMATION_TIME = 20;
 
     // max entity numbers
     public static final int MAX_ENTITY_NUMBER = 10;
@@ -33,14 +46,19 @@ public class Globals {
 
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
-    public static final int SIMPLE_ENEMY_ATTACK_COOLDOWN = 120;
-    public static final int RECENTLY_SPAWNED_TIME = 240;
-    public static final int ENEMY_SHOOTING_COOLDOWN = 120;
 
     public static boolean onePlayerMode;
 
-    // entity images
+    public static Image snakeHeadRed = new Image("snake_head_red.png");
+    public static Image snakeHeadPink = new Image("snake_head_pink.png");
+    public static Image snakeHeadWhite = new Image("snake_head_white.png");
+    public static Image snakeBodyRed = new Image("snake_body_red.png");
+    public static Image snakeBodyPink = new Image("snake_body_pink.png");
+    public static Image snakeBodyWhite = new Image("snake_body_white.png");
+
     public static Image title = new Image ("snake_main.png");
+    public static Image seaBackground = new Image("sea1.jpg");
+    public static Image wildwestBackround = new Image("wildwest.jpg");
     public static Image snakeHead = new Image("snake_head.png");
     public static Image snakeBody = new Image("snake_body.png");
     public static Image snakeHead2 = new Image("snake_head.png");
@@ -51,11 +69,19 @@ public class Globals {
     public static Image fugitivePowerup = new Image("powerup_berry.png");
     public static Image snakeShoot = new Image("shoot2.png");
 
-    public static Image paralyzedSimpleEnemy = new Image("paralyzed_simple_enemy.png");
+    public static Image simplePowerup;
+    public static Image movingPowerupLeft;
+    public static Image movingPowerupRight;
+    public static Image fugitivePowerupLeft;
+    public static Image fugitivePowerupRight;
 
-    public static Image powerupBerry = new Image("powerup_berry.png");
-
-    //.. put here the other images you want to use
+    public static Image simpleEnemyToRight;
+    public static Image simpleEnemyToLeft;
+    public static Image shootingEnemy;
+    public static Image chasingEnemy;
+    public static Image testEnemy;
+    public static Image paralyzedTestEnemy;
+    public static Image enemyShoot;
 
     // Player1 Controls
     public static boolean leftKeyDown;
@@ -85,6 +111,11 @@ public class Globals {
         oldGameObjects = new LinkedList<>();
         onePlayerMode = true;
         players = new ArrayList<>();
+        if (actualTheme.equals("sea")){
+            setSeaTheme();
+        } else if (actualTheme.equals("wildwest")){
+            setWildwestTheme();
+        }
     }
 
     public static void addGameObject(GameEntity toAdd) { newGameObjects.add(toAdd); }
@@ -108,5 +139,40 @@ public class Globals {
         Globals.oldGameObjects.clear();
         Globals.gameObjects.clear();
         Globals.players.clear();
+    }
+
+    static void setSeaTheme(){
+
+        simpleEnemyToRight = new Image("sea/shark_right_side.png");
+        simpleEnemyToLeft = new Image("sea/shark_left_side.png");
+        shootingEnemy = new Image("sea/simple_enemy.png");
+        chasingEnemy = new Image("sea/octopus.png");
+        testEnemy = new Image("sea/crab.png");
+        paralyzedTestEnemy = new Image("sea/crab_poisoned.png");
+        enemyShoot = new Image("sea/sea_enemy_projectile.png");
+
+        simplePowerup = new Image("sea/starfish.png");
+        movingPowerupLeft = new Image("sea/happyfish_left.png");
+        movingPowerupRight = new Image("sea/happyfish_right.png");
+        fugitivePowerupLeft = new Image("sea/goldfish_left.png");
+        fugitivePowerupRight = new Image("sea/goldfish_right.png");
+    }
+
+    static void setWildwestTheme(){
+
+        simpleEnemyToRight = new Image("wildwest/bee.png");
+        simpleEnemyToLeft = new Image("wildwest/bee.png");
+        shootingEnemy = new Image("wildwest/cowboy.png");
+        chasingEnemy = new Image("wildwest/hedgehog.png");
+        testEnemy = new Image("wildwest/pig.png");
+        paralyzedTestEnemy = new Image("wildwest/pig_poisoned.png");
+        enemyShoot = new Image("wildwest/wildwest_enemy_projectile.png");
+
+        simplePowerup = new Image("wildwest/lizard.png");
+        movingPowerupLeft = new Image("wildwest/ladybird.png");
+        movingPowerupRight = new Image("wildwest/ladybird.png");
+        fugitivePowerupLeft = new Image("wildwest/butterfly.png");
+        fugitivePowerupRight = new Image("wildwest/butterfly.png");
+
     }
 }

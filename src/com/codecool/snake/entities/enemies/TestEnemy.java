@@ -12,31 +12,37 @@ import javafx.scene.layout.Pane;
 public class TestEnemy extends GameEntity implements Animatable, Interactable, BodyInteractable {
 
     private Point2D heading;
-    private static final int damage = 10;
+    private static final int DAMAGE = 10;
+    private static final int SCORE = 10;
     private double direction;
-    private double speed = 0.8;
+    private double speed;
     private Brain brain;
 
     private boolean paralyzed;
     private int paralyzedRoundCounter = 180;
 
+    private int swingTimer = 60;
+    private boolean swingToRight = false;
+
     public TestEnemy(Pane pane) {
         super(pane);
 
-        this.brain = new Brain(Behavior.CHASING, this);
+        this.brain = new Brain(Behavior.HOMING, this);
 
-        setImage(Globals.simpleEnemy);
+        setImage();
         pane.getChildren().add(this);
 
         Double[] coords = Utils.getRandomCoordinates();
         setX(coords[0]);
         setY(coords[1]);
 
+        speed = Globals.ENTITY_HOMING_SPEED;
         direction = Utils.getRandomDirection();
-        setRotate(direction);
+        setRotate(-30);
         heading = Utils.directionToVector(direction, speed);
 
         paralyzed = false;
+
 
         Globals.actualEnemies++;
     }
@@ -45,38 +51,49 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
     public void step() {
         if (paralyzedRoundCounter < 1){
             paralyzed = false;
-            setImage(Globals.simpleEnemy);
+            setImage();
             paralyzedRoundCounter = 180;
+        }
+
+        // Swinging motion
+        if (swingTimer == 0 || swingTimer == 60) {
+            swingToRight = !swingToRight;
+        }
+        if (swingTimer > 0 && !swingToRight) {
+            setRotate(getRotate()+1);
+            swingTimer--;
+        } else if (swingTimer < 60 && swingToRight) {
+            setRotate(getRotate()-1);
+            swingTimer++;
         }
 
         if (paralyzed){
             speed = 0;
             paralyzedRoundCounter--;
         } else {
-            speed = 0.8;
+            speed = Globals.ENTITY_SPEED;
             if (isOutOfBounds()) {
                 destroy();
             }
 
-
             brain.navigate();
-
-            setRotate(direction);
             heading = Utils.directionToVector(direction, speed);
-
             setX(getX() + heading.getX());
             setY(getY() + heading.getY());
         }
 
     }
 
+    public void setImage() {setImage(Globals.testEnemy);}
+
     @Override
     public void apply(SnakeHead player) {
         if (paralyzed){
-            // TODO: put here Jeannie's changeScore method
+            player.setScore(SCORE);
             System.out.println("Score increase");
         } else {
-            player.changeHealth(-damage);
+            Globals.snakeHeadEntity.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
+            player.changeHealth(-DAMAGE);
         }
         destroy();
     }
@@ -90,7 +107,7 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
         } else {
             System.out.println("Im am paralized");
             paralyzed = true;
-            setImage(Globals.paralyzedSimpleEnemy);
+            setImage(Globals.paralyzedTestEnemy);
 
         }
     }
@@ -98,6 +115,7 @@ public class TestEnemy extends GameEntity implements Animatable, Interactable, B
     @Override
     public void apply(SnakeBody snakeBody) {
         Globals.snakeHeadEntity.changeHealth(-5);
+        snakeBody.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
         destroy();
     }
 

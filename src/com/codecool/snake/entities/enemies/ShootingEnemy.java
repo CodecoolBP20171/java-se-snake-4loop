@@ -14,14 +14,14 @@ import javafx.scene.layout.Pane;
 
 public class ShootingEnemy extends GameEntity implements Animatable, Interactable, BodyInteractable {
 
-    private static final int damage = 10;
+    private static final int DAMAGE = 10;
     private int shootingCooldown;
 
     public ShootingEnemy(Pane pane) {
         super(pane);
         shootingCooldown = Globals.ENEMY_SHOOTING_COOLDOWN;
 
-        setImage(Globals.simpleEnemy);
+        setImage();
         pane.getChildren().add(this);
 
         Double[] coords = Utils.getRandomBottomCoordinates();
@@ -30,6 +30,8 @@ public class ShootingEnemy extends GameEntity implements Animatable, Interactabl
 
         Globals.actualEnemies++;
     }
+
+    public void setImage() { setImage(Globals.shootingEnemy); }
 
     @Override
     public void step() {
@@ -45,14 +47,10 @@ public class ShootingEnemy extends GameEntity implements Animatable, Interactabl
     }
 
     @Override
-    public void setSpeed(double speed) {
-
-    }
+    public void setSpeed(double speed) {}
 
     @Override
-    public void setDirection(double direction) {
-
-    }
+    public void setDirection(double direction) {}
 
     @Override
     public double getDirection() {
@@ -61,21 +59,21 @@ public class ShootingEnemy extends GameEntity implements Animatable, Interactabl
 
     @Override
     public void apply(SnakeBody snakeBody) {
-        Globals.snakeHeadEntity.changeHealth(-damage/2);
+        Globals.snakeHeadEntity.changeHealth(-DAMAGE /2);
+        snakeBody.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
         destroy();
     }
 
     @Override
     public void apply(SnakeHead snakeHead) {
-        Globals.snakeHeadEntity.changeHealth(-damage);
+        Globals.snakeHeadEntity.changeHealth(-DAMAGE);
+        Globals.snakeHeadEntity.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
         destroy();
-
     }
 
     @Override
     public void apply(Projectile projectile) {
         destroy();
-
     }
 
     @Override

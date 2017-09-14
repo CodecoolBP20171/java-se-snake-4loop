@@ -57,8 +57,7 @@ public class Brain {
             ((Animatable) body).setDirection(Utils.deltaCoordsToDirection(deltaX, deltaY) + behavior.direction());
 
             Animatable animatable = (Animatable) body;
-            animatable.setSpeed((behavior.equals(Behavior.CHASING)) ?
-                    Globals.ENTITY_CHASING_SPEED : Globals.ENTITY_FLEEING_SPEED);
+            animatable.setSpeed(behavior.speed());
         }
 
     }
@@ -86,7 +85,7 @@ public class Brain {
 
     private boolean isCloseToSnakeHead() {
         SnakeHead snakeHead = Globals.snakeHeadEntity;
-        return (Math.abs(snakeHead.getBoundsInParent().getMaxX() - body.getBoundsInParent().getMaxX()) < 120 &&
-                Math.abs(snakeHead.getBoundsInParent().getMaxY() - body.getBoundsInParent().getMaxY()) < 120);
+        return (Math.abs(snakeHead.getBoundsInParent().getMaxX() - body.getBoundsInParent().getMaxX()) < behavior.radius() &&
+                Math.abs(snakeHead.getBoundsInParent().getMaxY() - body.getBoundsInParent().getMaxY()) < behavior.radius());
     }
 }

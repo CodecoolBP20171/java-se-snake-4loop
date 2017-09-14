@@ -7,66 +7,84 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
-public class MovingPowerup extends SimplePowerup implements Animatable {
-    /** this food created in random coordinates and head to random direction
-     * and pass over the screen, disappears when outOfBounds
+    /* this food created in random coordinates and pass over the screen
+     * disappears when outOfBounds
      */
+public class MovingPowerup extends SimplePowerup implements Animatable {
 
-    protected Point2D heading;
-    private double direction;
-    private static final int VALUE = 5;
-    private static double speed = Globals.ENTITY_SPEED;
+        protected Point2D heading;
+        private double direction;
+        private static final int VALUE = 5;
+        private static double speed;
+        private int recentlySpawned;
 
-    public MovingPowerup(Pane pane) {
-        super(pane);
-        setDirection();
-    }
+        public MovingPowerup(Pane pane) {
+            super(pane);
+            this.speed = Globals.ENTITY_SPEED;
 
-    @Override
-    protected void setImage() {
-        setImage(Globals.movingPowerup);
-    }
+            Double[] coords = Utils.getRandomSideCoordinates();
+            setX(coords[0]);
+            setY(coords[1]);
+            this.direction = Utils.getRandomSideDirection(coords[0], coords[1]);
 
-    @Override
-    public void setSpeed(double speed) {
-        MovingPowerup.speed = speed;
-    }
+            //setRotate(direction);
+            this.heading = Utils.directionToVector(direction, speed);
 
-    @Override
-    public void setDirection(double direction) {
-        this.direction = direction;
-        setRotate(direction);
-        heading = Utils.directionToVector(direction, speed);
-    }
+            this.recentlySpawned = Globals.RECENTLY_SPAWNED_TIME;
 
-    public void setDirection() {
-        setDirection(Utils.getRandomDirection());
-    }
+        }
 
-    @Override
-    public double getDirection() {
-        return direction;
-    }
+        @Override
+        public void setImage() {
+            if (getDirection() >= 0 && getDirection() <= 180) {
+                setImage(Globals.movingPowerupRight);
+                setRotate(getDirection()-90);
+            } else {
+                setImage(Globals.movingPowerupLeft);
+                setRotate(getDirection()+90);
+            }
+        }
 
-    @Override
-    public void step() {
-        if (isOutOfBounds()) {
+        @Override
+        public void setSpeed(double speed) {
+            MovingPowerup.speed = speed;
+        }
+
+        @Override
+        public void setDirection(double direction) {
+            this.direction = direction;
+            setRotate(direction);
+            heading = Utils.directionToVector(direction, speed);
+        }
+
+        @Override
+        public double getDirection() {
+            return this.direction;
+        }
+
+        @Override
+        public void step() {
+            if (recentlySpawned < 1 && isOutOfBounds()) {
+                destroy();
+            } else {
+                recentlySpawned--;
+                setImage();
+                heading = Utils.directionToVector(direction, speed);
+
+                setX(getX() + heading.getX());
+                setY(getY() + heading.getY());
+            }
+        }
+
+        @Override
+        public void apply(SnakeHead snakeHead) {
+            snakeHead.addPart(1);
+            snakeHead.setScore(MovingPowerup.VALUE);
             destroy();
         }
-        setX(getX() + heading.getX());
-        setY(getY() + heading.getY());
-    }
 
-    @Override
-    public void apply(SnakeHead snakeHead) {
-        snakeHead.addPart(1);
-        snakeHead.setScore(MovingPowerup.VALUE);
-        destroy();
+        @Override
+        public String getMessage() {
+            return "Got MovingPower-up :)";
+        }
     }
-
-    @Override
-    public String getMessage() {
-        return "Got MovingPower-up :)";
-    }
-
-}

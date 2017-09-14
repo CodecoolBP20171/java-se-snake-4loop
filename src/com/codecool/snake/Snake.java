@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -23,7 +24,6 @@ public class Snake extends Application {
     public void start(Stage primaryStage) {
 
         primaryStage.setTitle("Snake Game");
-
 
         Scene scene = new Scene(root, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
         // primaryStage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
@@ -49,11 +49,18 @@ public class Snake extends Application {
         MenuItem newGame = new MenuItem("New Game");
         newGame.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
+                Globals.snakeBodyParts.clear();
                 Globals.destroyAll();
-                Globals.root.setStyle("-fx-background-color: white;");
                 Game game = new Game();
                 root.setCenter(game);
                 game.start();
+                if (Globals.actualTheme.equals("sea")){
+                    Globals.setSeaTheme();
+                    Globals.root.setStyle("-fx-background-image: url('sea1.jpg')");
+                } else if (Globals.actualTheme.equals("wildwest")){
+                    Globals.setWildwestTheme();
+                    Globals.root.setStyle("-fx-background-image: url('wildwest.jpg')");
+                }
             }
         });
 
@@ -104,14 +111,40 @@ public class Snake extends Application {
             }
         });
 
-        menuSettings.getItems().addAll(playerMode);
+        Menu changeTheme = new Menu("Change Theme Suit");
+        final ToggleGroup groupThemes = new ToggleGroup();
 
+        RadioMenuItem seaTheme = new RadioMenuItem("Sea");
+        seaTheme.setUserData("sea");
+        seaTheme.setToggleGroup(groupThemes);
+        changeTheme.getItems().add(seaTheme);
+
+        RadioMenuItem wildwestTheme = new RadioMenuItem("Wild West");
+        wildwestTheme.setUserData("wildwest");
+        wildwestTheme.setToggleGroup(groupThemes);
+        changeTheme.getItems().add(wildwestTheme);
+
+        groupThemes.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            public void changed(ObservableValue<? extends Toggle> ov,
+                                Toggle old_toggle, Toggle new_toggle) {
+                if (groupThemes.getSelectedToggle() != null) {
+                    String userChoice = (String) groupThemes.getSelectedToggle().getUserData();
+                    if (userChoice.equals("sea")){
+                        System.out.println("NEW THEME: SEA");
+                        Globals.actualTheme = "sea";
+                        Globals.setSeaTheme();
+                    } else if (userChoice.equals("wildwest")){
+                        System.out.println("NEW THEME: WILDWEST");
+                        Globals.actualTheme = "wildwest";
+                        Globals.setWildwestTheme();
+                    }
+                }
+            }
+        });
+
+        menuSettings.getItems().addAll(playerMode, changeTheme);
         menuFile.getItems().addAll(newGame, new SeparatorMenuItem(), exit);
-
         primaryStage.setScene(scene);
-
         primaryStage.show();
-
     }
-
 }

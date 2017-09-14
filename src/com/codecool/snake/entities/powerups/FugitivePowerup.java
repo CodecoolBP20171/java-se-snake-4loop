@@ -26,10 +26,15 @@ public class FugitivePowerup extends MovingPowerup {
     }
 
     @Override
-    protected void setImage() {
-        setImage(Globals.fugitivePowerup);
+    public void setImage() {
+        if (getDirection() >= 0 && getDirection() <= 180) {
+            setImage(Globals.fugitivePowerupRight);
+            setRotate(getDirection()-90);
+        } else {
+            setImage(Globals.fugitivePowerupLeft);
+            setRotate(getDirection()+90);
+        }
     }
-
 
     @Override
     public String getMessage() {
@@ -38,12 +43,9 @@ public class FugitivePowerup extends MovingPowerup {
 
     @Override
     public void step() {
-
         brain.navigate();
-
-        setRotate(getDirection());
+        setImage();
         heading = Utils.directionToVector(getDirection(), speed);
-
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
     }

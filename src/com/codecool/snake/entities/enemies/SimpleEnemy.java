@@ -15,7 +15,7 @@ import javafx.scene.layout.Pane;
 public class SimpleEnemy extends GameEntity implements Animatable, Interactable, BodyInteractable {
 
     private Point2D heading;
-    private static final int damage = 10;
+    private static final int DAMAGE = 10;
     private double direction;
     private double speed;
     private int attackCoolDown;
@@ -25,22 +25,31 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable,
 
         super(pane);
 
-        setImage(Globals.simpleEnemy);
         pane.getChildren().add(this);
 
         recentlySpawned = Globals.RECENTLY_SPAWNED_TIME;
+        attackCoolDown = 0;
 
-        Double[] coords = Utils.getRandomSideCoordinates(); //
+        Double[] coords = Utils.getRandomSideCoordinates();
         setX(coords[0]);
         setY(coords[1]);
 
         direction = Utils.getRandomSideDirection(coords[0], coords[1]);
-        setRotate(direction);
+        setImage();
+        speed = Utils.getRandomSpeed(1, 3);
         heading = Utils.directionToVector(direction, speed);
 
-        speed = Utils.getRandomSpeed(1, 3);
-
         Globals.actualEnemies++;
+    }
+
+    public void setImage() {
+        if (getX() < Globals.WINDOW_WIDTH / 2) {
+            setImage(Globals.simpleEnemyToRight);
+            setRotate(direction-90);
+        } else {
+            setImage(Globals.simpleEnemyToLeft);
+            setRotate(direction+90);
+        }
     }
 
     @Override
@@ -51,7 +60,6 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable,
         }
 
         recentlySpawned--;
-        setRotate(direction);
         heading = Utils.directionToVector(direction, speed);
 
         setX(getX() + heading.getX());
@@ -61,25 +69,23 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable,
     @Override
     public void apply(SnakeHead player) {
         if (attackCoolDown < 1) {
-            // TODO: biting "animation" and/or sound
-            player.changeHealth(-damage);
+            Globals.snakeHeadEntity.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
+            player.changeHealth(-DAMAGE);
             attackCoolDown = Globals.SIMPLE_ENEMY_ATTACK_COOLDOWN;
         } else {
             attackCoolDown--;
         }
-        // destroy();
     }
 
     @Override
-    public void apply(SnakeBody player) {
+    public void apply(SnakeBody snakeBody) {
         if (attackCoolDown < 1) {
-            // TODO: biting "animation" and/or sound
-            Globals.snakeHeadEntity.changeHealth(-damage/2);
+            Globals.snakeHeadEntity.changeHealth(-DAMAGE /2);
+            snakeBody.setDamagedAnimationTimer(Globals.DAMAGED_ANIMATION_TIME);
             attackCoolDown = Globals.SIMPLE_ENEMY_ATTACK_COOLDOWN;
         } else {
             attackCoolDown--;
         }
-        // destroy();
     }
 
     @Override
@@ -88,18 +94,14 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable,
     }
 
     @Override
-    public void setSpeed(double speed) {
-
-    }
+    public void setSpeed(double speed) { this.speed = speed; }
 
     @Override
-    public void setDirection(double direction) {
-
-    }
+    public void setDirection(double direction) { this.direction = direction; }
 
     @Override
     public double getDirection() {
-        return 0;
+        return direction;
     }
 
     @Override
