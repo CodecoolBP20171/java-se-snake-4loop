@@ -41,8 +41,8 @@ public class Globals {
     public static final int MAX_ENTITY_NUMBER = 10;
     public static final int MAX_ENEMY_NUMBER = 8;
     public static final int MAX_PUP_NUMBER = 7;
-    public static int actualPowerUps;
-    public static int actualEnemies;
+    public static int actualPowerUps = 4;
+    public static int actualEnemies = 4;
 
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
@@ -63,10 +63,6 @@ public class Globals {
     public static Image snakeBody = new Image("snake_body.png");
     public static Image snakeHead2 = new Image("snake_head.png");
     public static Image snakeBody2 = new Image("snake_body.png");
-    public static Image simpleEnemy = new Image("simple_enemy.png");
-    public static Image simplePowerup = new Image("powerup_berry.png");
-    public static Image movingPowerup = new Image("powerup_berry.png");
-    public static Image fugitivePowerup = new Image("powerup_berry.png");
     public static Image snakeShoot = new Image("shoot2.png");
 
     public static Image simplePowerup;
