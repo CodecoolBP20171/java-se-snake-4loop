@@ -108,8 +108,9 @@ public class SnakeHead extends GameEntity implements Animatable {
             }
 
             if (!Globals.isAlive1 && !Globals.isAlive2) {
+                Game.showEndScreen(score);
                 System.out.println("Game Over");
-                Globals.gameLoop.stop();
+                Globals.destroyAll();
             }
         }
 

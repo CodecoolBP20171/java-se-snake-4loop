@@ -87,20 +87,34 @@ public class Game extends Pane {
     }
 
     public static void showEndScreen(int score) {
+
         Globals.root.setBottom(null);
 
         Text message = new Text("Game Over!");
         message.setFill(Color.RED);
         message.setFont(Font.font("Sans", FontWeight.BOLD, FontPosture.ITALIC, 40));
 
-        Text message2 = new Text("Player Score: " + score);
+        Text message2 = new Text("Player1 Score: " + score);
         message2.setFill(Color.BLUE);
         message2.setFont(Font.font("Sans", FontWeight.BOLD, 30));
 
         Text separator = new Text("\n\n\n");
-        TextFlow textFlow = new TextFlow(message, separator, message2);
+
+        TextFlow textFlow;
+
+        if (Globals.onePlayerMode) {
+            textFlow = new TextFlow(message, separator, message2);
+            textFlow.setStyle("-fx-padding: " + Globals.WINDOW_HEIGHT / 2.40 + " 0 0 0");
+        } else {
+            Text message3 = new Text("Player2 Score: " + score);
+            message3.setFill(Color.GREEN);
+            message3.setFont(Font.font("Sans", FontWeight.BOLD, 30));
+            Text space = new Text("                     ");
+            textFlow = new TextFlow(message, separator, message2, space, message3);
+            textFlow.setStyle("-fx-padding: " + Globals.WINDOW_HEIGHT / 2.80 + " 0 0 0");
+        }
+
         textFlow.setTextAlignment(TextAlignment.CENTER);
-        textFlow.setStyle("-fx-padding: " + Globals.WINDOW_HEIGHT / 2.40 + " 0 0 0");
 
         Globals.root.setStyle("-fx-background-color: tan;");
 
