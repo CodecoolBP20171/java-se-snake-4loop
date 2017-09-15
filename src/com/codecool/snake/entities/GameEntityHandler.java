@@ -40,19 +40,21 @@ public class GameEntityHandler {
     private static void checkEntities() {
 
         if (entityQueue.size() < Globals.MAX_ENTITY_NUMBER) {
-
+            System.out.println("Entity queue size is less than max entity number");
             int possibleNewEntities = Globals.MAX_ENTITY_NUMBER - Globals.actualPowerUps - Globals.actualEnemies;
-
+            System.out.println("Possible new entities: " + possibleNewEntities);
             List<String> missingEntities = new LinkedList<>();
 
             if (possibleNewEntities > 0) {
-
+                System.out.println("Possible new entities greater than 0");
                 int actualNewEntities = Utils.getRandomInt(possibleNewEntities + 1);
-
+                System.out.println("Random Generated actual new entities: " + actualNewEntities);
                 if (actualNewEntities > 0) {
-
+                    System.out.println("Random Actual new entities greater than 0 this turn");
                     int powerupsPossibleMax = Globals.MAX_PUP_NUMBER - Globals.actualPowerUps;
                     int enemiesPossibleMax = Globals.MAX_ENEMY_NUMBER - Globals.actualEnemies;
+                    System.out.println("powerupsPossibleMax: " + powerupsPossibleMax);
+                    System.out.println("enemiesPossibleMax: " + enemiesPossibleMax);
 
                     for (int i = 0; i < powerupsPossibleMax; i++) {
                         missingEntities.add("P");
@@ -67,7 +69,14 @@ public class GameEntityHandler {
                         entityQueue.add(missingEntities.remove(randomMissingEntityIndex));
                     }
 
-                    addTimer();
+                    System.out.println("********************************");
+                    System.out.println("entityQueue contains now:");
+                    for (String item : entityQueue) {
+                        System.out.println(item);
+                    }
+                    System.out.println("*********************************");
+
+                    //addTimer();
 
                 }
 
@@ -83,6 +92,7 @@ public class GameEntityHandler {
 
         if (countdownTimer == 0) {
             countdownTimer = Utils.getRandomTime();
+            System.out.println("New countdownTimer: " + countdownTimer);
         }
 
     }

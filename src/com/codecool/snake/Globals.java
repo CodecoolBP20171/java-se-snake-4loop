@@ -41,8 +41,8 @@ public class Globals {
     public static final int MAX_ENTITY_NUMBER = 10;
     public static final int MAX_ENEMY_NUMBER = 8;
     public static final int MAX_PUP_NUMBER = 7;
-    public static int actualPowerUps = 4;
-    public static int actualEnemies = 4;
+    public static int actualPowerUps = 0;
+    public static int actualEnemies = 0;
 
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
@@ -135,6 +135,9 @@ public class Globals {
         Globals.oldGameObjects.clear();
         Globals.gameObjects.clear();
         Globals.players.clear();
+
+        actualEnemies = 0;
+        actualPowerUps = 0;
     }
 
     static void setSeaTheme(){

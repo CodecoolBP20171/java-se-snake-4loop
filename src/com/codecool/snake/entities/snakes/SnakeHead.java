@@ -104,7 +104,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (Globals.onePlayerMode) {
             if (isOutOfBounds() || health <= 0) {
                 Game.showEndScreen(score);
-                System.out.println("Game Over");
+                System.out.println("Game Over1");
                 Globals.destroyAll();
             }
         } else {
@@ -121,7 +121,7 @@ public class SnakeHead extends GameEntity implements Animatable {
 
             if (!Globals.isAlive1 && !Globals.isAlive2) {
                 Game.showEndScreen(score);
-                System.out.println("Game Over");
+                System.out.println("Game Over2");
                 Globals.destroyAll();
             }
         }
@@ -147,7 +147,7 @@ public class SnakeHead extends GameEntity implements Animatable {
                         !entity.equals(Globals.snakeBodyParts.get(2)) &&
                         !entity.equals(Globals.snakeBodyParts.get(3))){
                     Game.showEndScreen(score);
-                    System.out.println("Game Over");
+                    System.out.println("Game Over3");
                     Globals.destroyAll();
                 }
             }
